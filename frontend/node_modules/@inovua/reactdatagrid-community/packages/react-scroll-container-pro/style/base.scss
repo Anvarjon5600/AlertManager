@@ -1,0 +1,147 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.inovua-react-scroll-container {
+  overflow: hidden;
+  position: relative;
+  flex-flow: column;
+  flex: 1 1 0;
+
+  &--block {
+    display: flex;
+  }
+
+  &--inline-block {
+    display: inline-flex;
+  }
+
+  &__wrapper {
+    display: flex;
+    // flex-basis auto is needed for Safari. also, we need flex-shrink 1
+    flex: 1 1 auto;
+  }
+
+  &__scroller {
+    overflow: scroll;
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: flex-start;
+    // flex-flow column is needed for Safari
+    flex-flow: column;
+    display: flex;
+
+    &.inovua-react-scroll-container__scroller--direction-rtl {
+      display: block;
+      // display flex does not work well with direction: rtl
+      // chrome does not report scrollWidth correctly when direction is rtl, for flex display
+      display: grid;
+    }
+
+    &--avoid-repaint {
+      backface-visibility: hidden;
+    }
+
+    &--hide-native-scrollbar-if-possible::-webkit-scrollbar {
+      display: none; // optimize webkit to not repaint the scrollbar
+    }
+  }
+
+  &__view {
+    // flex-basis auto is needed for Safari
+    flex: 1 0 auto;
+    position: relative;
+    box-sizing: border-box;
+
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      /* because of CSS flexbox bugs, IE 10-11 need this rule */
+
+      /* this is NOT APPLIED in Edge or other browsers */
+      max-width: 100%;
+    }
+
+    &--zero-width-scrollbar {
+      flex: 1 0 100%;
+    }
+  }
+
+  &__scrollbar {
+    pointer-events: none;
+    user-select: none;
+    opacity: 1;
+    transition-property: opacity;
+    transition-duration: 100ms;
+    overflow: visible;
+    z-index: 1;
+
+    &--hidden {
+      opacity: 0;
+      transition-duration: 300ms;
+    }
+
+    &--direction-rtl {
+      direction: rtl;
+    }
+  }
+
+  &__track {
+    pointer-events: none;
+    position: relative;
+
+    &--drag-to-scroll {
+      pointer-events: all;
+    }
+
+    &--orientation-vertical {
+      height: 100%;
+    }
+
+    &--direction-rtl {
+      transform: rotateY(180deg);
+    }
+
+    transition-property: background-color;
+    transition-duration: 100ms;
+    cursor: auto;
+
+    &--visible {
+      cursor: pointer;
+    }
+  }
+
+  &__thumb {
+    user-select: none;
+    display: block;
+    cursor: auto;
+    will-change: transform;
+    position: absolute;
+
+    &--orientation-vertical {
+      top: 0;
+      right: 0;
+      transition-property: width;
+    }
+
+    &--orientation-horizontal {
+      bottom: 0;
+      transition-property: height;
+
+      &.inovua-react-scroll-container__thumb--direction-ltr {
+        left: 0;
+      }
+
+      &.inovua-react-scroll-container__thumb--direction-rtl {
+        right: 0;
+      }
+    }
+  }
+}
+
+.inovua--hide-native-scroll-if-possible::-webkit-scrollbar {
+  display: none; // optimize webkit to not repaint the scrollbar
+}

@@ -1,0 +1,72 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+@import '../../ArrowScroller/style/base.scss';
+@import '../../DropdownButton/style/base.scss';
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS} {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  text-align: start;
+  direction: ltr;
+  width: 100%;
+  overflow: visible;
+
+  &:not(.#{$INOVUA_TOOLBAR_ROOT_CLASS}--native-scroll) {
+    overflow: hidden;
+  }
+
+  *::-ms-backdrop,
+  & {
+    overflow: hidden;
+  } /* IE11 */
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  .inovua-react-toolkit-menu.inovua-react-toolkit-menu {
+    position: fixed;
+    z-index: 10000;
+  }
+}
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS}--dropdown {
+  overflow: visible;
+}
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS}__separator {
+  width: 1px;
+  margin: 6px 4px;
+  align-self: stretch;
+}
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS}__arrow {
+  &--visible {
+    display: flex;
+    align-items: center;
+  }
+
+  &--direction-up,
+  &--direction-down {
+    width: 100%;
+    flex-flow: column;
+  }
+}
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS}--rtl {
+  display: flex;
+  justify-content: flex-end;
+
+  .#{$INOVUA_TOOLBAR_ROOT_CLASS}__inner-wrapper {
+    direction: rtl;
+  }
+}

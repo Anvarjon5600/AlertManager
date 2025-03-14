@@ -1,0 +1,114 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+@import './variables.scss';
+@import '../../../../SplitButton/style/theme/default/index.scss';
+
+.#{$INOVUA_TOOLBAR_ROOT_CLASS}.#{$INOVUA_TOOLBAR_ROOT_CLASS}--theme-#{$INOVUA_TOOLBAR_THEME_NAME} {
+  border: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+  padding: 2px;
+  background: $INOVUA_TOOLBAR_BG_COLOR;
+  color: $INOVUA_TOOLBAR_COLOR;
+  fill: $INOVUA_TOOLBAR_FILL;
+  font-size: $INOVUA_TOOLBAR_FONT_SIZE;
+
+  .inovua-react-toolkit-split-button--theme-default
+    .inovua-react-toolkit-split-button__button {
+    padding: 4px 8px;
+  }
+
+  .inovua-react-toolkit-button--theme-default:not(.inovua-react-toolkit-split-button__button):not(.inovua-react-toolkit-dropdown-button__button) {
+    padding: 4px 8px;
+  }
+
+  .inovua-react-toolkit-numeric-input,
+  input:not(.inovua-react-toolkit-combo-box__input):not(.inovua-react-toolkit-text-input__input):not(.inovua-react-toolkit-date-input__input):not(.inovua-react-toolkit-numeric-input__input) {
+    border: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+    outline: none;
+  }
+
+  .inovua-react-toolkit-numeric-input.inovua-react-toolkit-numeric-input--focused,
+  input:not(.inovua-react-toolkit-combo-box__input):not(.inovua-react-toolkit-text-input__input):not(.inovua-react-toolkit-date-input__input):not(.inovua-react-toolkit-numeric-input__input):focus {
+    border: 1px solid $INOVUA_TOOLBAR_FOCUSED_INPUT_BORDER_COLOR;
+  }
+
+  .inovua-react-toolkit-split-button > .inovua-react-toolkit-dropdown-button {
+    .inovua-react-toolkit-dropdown-button__button {
+      padding: 0;
+    }
+  }
+
+  .inovua-react-toolkit-split-button.inovua-react-toolkit-split-button--theme-default {
+    /* stylelint-disable */
+    @include apply-separator-styles(
+      $INOVUA_TOOLBAR_SEPARATOR_COLOR,
+      $INOVUA_TOOLBAR_SEPARATOR_COLOR
+    );
+    /* stylelint-enable */
+  }
+
+  &.#{$INOVUA_TOOLBAR_ROOT_CLASS}--change-button-styles {
+    .inovua-react-toolkit-split-button.inovua-react-toolkit-split-button.inovua-react-toolkit-split-button,
+    .inovua-react-toolkit-dropdown-button.inovua-react-toolkit-dropdown-button.inovua-react-toolkit-dropdown-button,
+    .inovua-react-toolkit-button.inovua-react-toolkit-button.inovua-react-toolkit-button {
+      transition: background-color 0.2s;
+
+      & {
+        color: $INOVUA_TOOLBAR_COLOR;
+        fill: $INOVUA_TOOLBAR_COLOR;
+
+        &:not(:hover) {
+          background-color: transparent;
+        }
+
+        &:hover {
+          background-color: $INOVUA_TOOLBAR_HOVER_BG;
+        }
+      }
+
+      &.inovua-react-toolkit-button--disabled {
+        opacity: 0.5;
+        background-color: transparent;
+      }
+
+      &:not(.inovua-react-toolkit-button--disabled):hover {
+        background-color: $INOVUA_TOOLBAR_HOVER_BG;
+      }
+
+      font-size: $INOVUA_TOOLBAR_FONT_SIZE;
+    }
+  }
+
+  .inovua-react-toolkit-toolbar__separator {
+    background: $INOVUA_TOOLBAR_BORDER_COLOR;
+  }
+
+  .#{$INOVUA_TOOLBAR_ROOT_CLASS}__arrow {
+    background: $INOVUA_TOOLBAR_BG_COLOR;
+
+    &:hover {
+      background: $INOVUA_TOOLBAR_HOVER_BG;
+    }
+
+    &--direction-right {
+      border-left: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+    }
+
+    &--direction-left {
+      border-right: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+    }
+
+    &--direction-down {
+      border-top: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+    }
+
+    &--direction-up {
+      border-bottom: 1px solid $INOVUA_TOOLBAR_BORDER_COLOR;
+    }
+  }
+}

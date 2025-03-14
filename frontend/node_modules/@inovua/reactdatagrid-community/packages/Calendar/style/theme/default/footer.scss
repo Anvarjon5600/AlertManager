@@ -1,0 +1,37 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  padding: 4px 12px 6px 12px;
+  display: flex;
+  flex: 1;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button {
+    min-width: 70px;
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-cancel.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-cancel.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-cancel {
+      border: 1px solid $INOVUA_CALENDAR_CANCEL_BUTTON_BORDER_COLOR;
+      color: $INOVUA_DATE_INPUT_COLOR;
+      max-height: 28px;
+      border-radius: 1px;
+    }
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-today.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-today.#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button-today {
+      max-height: 28px;
+      border-radius: 1px;
+
+      &:hover {
+        color: $INOVUA_DATE_INPUT_COLOR;
+      }
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button
+    + .#{$INOVUA_CALENDAR_ROOT_CLASS}__footer-button {
+    margin-left: 16px;
+  }
+}

@@ -1,0 +1,13 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_CALENDAR_THEME_NAME: 'blue-dark' !default;
+$INOVUA_CALENDAR_MAIN_COLOR: #4bacb8 !default;
+
+@import '../../../../Button/style/theme/blue-dark/index.scss';
+
+@import '../default-dark/index.scss';

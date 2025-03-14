@@ -1,0 +1,102 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS} {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  &,
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}--position-fixed {
+  position: fixed;
+}
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}--visible {
+  visibility: visible;
+  pointer-events: inherit;
+  opacity: 1;
+}
+
+// animation
+.#{$INOVUA_OVERLAY_ROOT_CLASS}--has-transition {
+  &.#{$INOVUA_OVERLAY_ROOT_CLASS}--transition-enter {
+    opacity: 0;
+    visibility: visible;
+  }
+
+  &.#{$INOVUA_OVERLAY_ROOT_CLASS}--transition-enter-active {
+    transition: opacity 1000ms ease;
+    opacity: 1;
+  }
+
+  &.#{$INOVUA_OVERLAY_ROOT_CLASS}--transition-leave {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  &.#{$INOVUA_OVERLAY_ROOT_CLASS}--transition-leave-active {
+    transition: opacity 1000ms ease;
+    opacity: 0;
+  }
+}
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}__content {
+  position: relative;
+  z-index: 1;
+}
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}__arrow-wrapper {
+  position: absolute;
+  overflow: hidden;
+
+  &--bottom,
+  &--top {
+    transform: translateX(-50%);
+  }
+
+  &--right,
+  &--left {
+    transform: translateY(-50%);
+  }
+}
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}__arrow {
+  position: absolute;
+  transform-origin: center;
+
+  &--top {
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  }
+
+  &--left {
+    top: 50%;
+    left: 0;
+    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+  }
+
+  &--right {
+    right: 0;
+    top: 50%;
+    transform: translateX(50%) translateY(-50%) rotate(45deg);
+  }
+
+  &--bottom {
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) translateY(50%) rotate(45deg);
+  }
+}

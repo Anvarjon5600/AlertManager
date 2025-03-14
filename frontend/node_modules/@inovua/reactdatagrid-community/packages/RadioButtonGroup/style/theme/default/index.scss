@@ -1,0 +1,40 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+@import '../../../../RadioButton/style/theme/default/index.scss';
+
+.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--theme-#{$INOVUA_RADIO_BUTTON_GROUP_THEME_NAME} {
+  outline: none;
+
+  &.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--focused {
+    .inovua-react-toolkit-radio-button--checked {
+      .inovua-react-toolkit-radio-button__icon-wrapper {
+        border-radius: 10px;
+        box-shadow: $INOVUA_RADIO_BUTTON_CHECKED_BOX_SHADOW;
+      }
+    }
+  }
+
+  &.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--orientation-vertical {
+    .inovua-react-toolkit-radio-button {
+      margin-bottom: 8px;
+    }
+  }
+
+  &.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--orientation-horizontal {
+    display: flex;
+
+    &.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--rtl > *:not(:first-child) {
+      margin-right: 8px;
+    }
+
+    &.#{$INOVUA_RADIO_BUTTON_GROUP_ROOT_CLASS}--ltr > *:not(:first-child) {
+      margin-left: 8px;
+    }
+  }
+}

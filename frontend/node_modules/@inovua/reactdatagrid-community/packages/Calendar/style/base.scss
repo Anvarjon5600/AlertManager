@@ -1,0 +1,144 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../Overlay/style/base.scss';
+
+@import './variables.scss';
+@import './field.scss';
+@import './clock.scss';
+@import './spinner.scss';
+@import './time-picker.scss';
+@import './year-view.scss';
+@import './decade-view.scss';
+@import './month-decade-view.scss';
+@import './navbar.scss';
+
+@import '../../Overlay/style/base.scss';
+@import '../../Button/style/base.scss';
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS} {
+  border: 0;
+  visibility: visible;
+  animation: inovua-react-toolkit-date-input-animation-fade-in 0.2s;
+}
+
+@keyframes inovua-react-toolkit-date-input-animation-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS},
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__calendar,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__basic-month-view {
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-week-number {
+  flex: none;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__transition-month-view {
+  position: relative;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__prev {
+  transform: translate3d(-100%, 0, 0);
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__next {
+  transform: translate3d(100%, 0, 0);
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}--transition-left {
+  transform: translate3d(-100%, 0, 0);
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__next {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}--transition-right {
+  z-index: 1111;
+  transform: translate3d(100%, 0, 0);
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__prev {
+    transform: translate3d(0%, 0, 0);
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__center {
+  z-index: 10;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__prev,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__center,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__next {
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}--transition {
+    transition-property: transform;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__prev,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__next {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute !important;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__basic-month-view {
+  outline: none;
+
+  &-week-day-name {
+    padding: 5px 0;
+  }
+
+  &-day--hidden {
+    visibility: hidden;
+  }
+
+  &-day--disabled {
+    color: #bfbfbf;
+  }
+
+  &-cell {
+    flex: 1 0 auto;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-week-day-names {
+    flex: none;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-row,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__basic-month-view-row {
+  display: flex;
+  flex-flow: row;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
+@import '../../Flex/style/index.scss';

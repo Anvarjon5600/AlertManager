@@ -1,0 +1,141 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  border: 1px solid $INOVUA_DATE_INPUT_BORDER_GRAY_COLOR;
+  border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+  transition: border 0.2s;
+  background: $INOVUA_DATE_INPUT_BACKGROUND;
+  min-height: 28px;
+
+  &:hover {
+    border: 1px solid $INOVUA_DATE_INPUT_BORDER_HOVER;
+  }
+
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--disabled {
+    border: 1px solid $INOVUA_DATE_INPUT_BORDER_GRAY_COLOR;
+
+    &:not(.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon--disabled) {
+      opacity: 0.5;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__input {
+    padding: 0 8px;
+    min-height: 28px;
+    height: 28px;
+    color: $INOVUA_DATE_INPUT_COLOR;
+    font-size: $INOVUA_CALENDAR_DATE_INPUT_FONT_SIZE;
+
+    &::-ms-clear {
+      display: none;
+    }
+
+    &:not(.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__input--disabled) {
+      background: $INOVUA_DATE_INPUT_BACKGROUND;
+      color: $INOVUA_DATE_INPUT_COLOR;
+
+      &::-ms-clear {
+        display: none;
+      }
+    }
+
+    &::placeholder {
+      color: $INOVUA_DATE_INPUT_PLACEHOLDER_COLOR;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__input-placeholder {
+    color: $INOVUA_DATE_INPUT_PLACEHOLDER_COLOR;
+  }
+
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--focused {
+    border: 1px solid $INOVUA_DATE_INPUT_BORDER_FOCUS;
+    box-shadow: $INOVUA_DATE_INPUT_BOX_SHADOW;
+  }
+
+  & > .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__picker {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.34375);
+  }
+
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--rtl {
+    .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon {
+      margin-left: 8px;
+    }
+  }
+
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--ltr {
+    .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: $INOVUA_CALENDAR_ICON_COLOR;
+
+    &:hover:not(.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon--disabled) {
+      fill: $INOVUA_CALENDAR_ICON_COLOR_HOVER;
+    }
+
+    &:active:not(.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__calendar-icon--disabled) {
+      margin-top: 1px;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon {
+    color: $INOVUA_CALENDAR_ICON_COLOR;
+    fill: $INOVUA_CALENDAR_ICON_COLOR;
+    margin-right: 8px;
+    flex: 1 0 auto;
+    transform: translateY(0);
+
+    &:active {
+      transform: translateY(1px);
+    }
+
+    &--disabled {
+      display: flex;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon--animation {
+    animation: inovua-react-toolkit-date-input-animation-fade-in 0.2s;
+  }
+
+  @keyframes inovua-react-toolkit-date-input-animation-fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon--hidden {
+    visibility: hidden;
+    margin-right: 4px;
+  }
+
+  .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon {
+    transition: fill 250ms ease-in-out;
+    &:hover {
+      color: $INOVUA_CALENDAR_ICON_COLOR_HOVER;
+      fill: $INOVUA_CALENDAR_ICON_COLOR_HOVER;
+    }
+  }
+
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--focused
+    .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon {
+    color: $INOVUA_CALENDAR_ICON_COLOR;
+    fill: $INOVUA_CALENDAR_ICON_COLOR;
+  }
+}

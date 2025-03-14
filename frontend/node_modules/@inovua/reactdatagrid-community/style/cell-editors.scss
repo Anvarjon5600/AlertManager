@@ -1,0 +1,29 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.InovuaReactDataGrid__cell__editor {
+  position: absolute;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: white;
+
+  &--bool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.InovuaReactDataGrid
+  .InovuaReactDataGrid__cell__editor.InovuaReactDataGrid__cell__editor--text {
+  height: 100%;
+  width: 100%;
+}

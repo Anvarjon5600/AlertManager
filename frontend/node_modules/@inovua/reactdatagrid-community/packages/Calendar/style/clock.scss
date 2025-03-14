@@ -1,0 +1,39 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock {
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  display: inline-block;
+  border-radius: 50%;
+  position: relative;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-overlay,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-center {
+  border-radius: 50%;
+  position: absolute;
+  transform: translate3d(-50%, -50%, 0);
+  top: 50%;
+  left: 50%;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-hand,
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-tick {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 1px;
+}

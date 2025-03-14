@@ -1,0 +1,67 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS} {
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  position: relative;
+  overflow: visible;
+  vertical-align: middle;
+
+  & > .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__picker {
+    min-width: 100%;
+    position: absolute;
+    z-index: 100;
+    left: -1px;
+    background: white;
+  }
+}
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--picker-position-bottom
+  > .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__picker {
+  top: 100%;
+}
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}--picker-position-top
+  > .#{$INOVUA_DATE_INPUT_ROOT_CLASS}__picker {
+  bottom: 100%;
+}
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__input {
+  width: 100%;
+  flex: 1 1 auto;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+$hoverColor: darken(gray, 20%);
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon {
+  color: gray;
+  fill: gray;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  svg {
+    vertical-align: middle;
+  }
+}
+
+.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__clear-icon:hover {
+  color: $hoverColor;
+  fill: $hoverColor;
+}

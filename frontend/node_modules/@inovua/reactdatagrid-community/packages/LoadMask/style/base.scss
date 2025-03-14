@@ -1,0 +1,74 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './round.scss';
+
+@keyframes inovua-react-toolkit-load-mask-animation__loader-fade {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.25;
+  }
+}
+
+.inovua-react-toolkit-load-mask {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: none;
+  top: 0;
+  left: 0;
+
+  &--visible {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.inovua-react-toolkit-load-mask__loader {
+  position: relative;
+}
+
+.inovua-react-toolkit-load-mask__background-layer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.inovua-react-toolkit-load-mask__loader-loadbar {
+  animation: inovua-react-toolkit-load-mask-animation__loader-fade 1s linear
+    infinite;
+  position: absolute;
+  background: #000;
+  left: 44.5%;
+  top: 37%;
+  width: 12%;
+  height: 26%;
+  opacity: 0;
+}
+
+.inovua-react-toolkit-load-mask__loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* stylelint-disable */
+@for $index from 0 through 11 {
+  .inovua-react-toolkit-load-mask__loader-loadbar--#{$index + 1} {
+    transform: rotate(#{30 * $index}deg) translate(0, -142%);
+    animation-delay: -($index * 1s - decimal-round($index/12, 4));
+  }
+}
+
+/* stylelint-enable */

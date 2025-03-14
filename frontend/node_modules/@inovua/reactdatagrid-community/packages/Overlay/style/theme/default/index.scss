@@ -1,0 +1,23 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_OVERLAY_ROOT_CLASS}.#{$INOVUA_OVERLAY_ROOT_CLASS}--theme-#{$INOVUA_OVERLAY_THEME_NAME} {
+  border: $INOVUA_OVERLAY_BORDER;
+  background: #fff;
+  box-shadow: $INOVUA_OVERLAY_BOX_SHADOW;
+
+  .#{$INOVUA_OVERLAY_ROOT_CLASS}__content {
+    background: #fff;
+  }
+
+  .#{$INOVUA_OVERLAY_ROOT_CLASS}__arrow {
+    background: #fff;
+    border: $INOVUA_OVERLAY_BORDER;
+  }
+}

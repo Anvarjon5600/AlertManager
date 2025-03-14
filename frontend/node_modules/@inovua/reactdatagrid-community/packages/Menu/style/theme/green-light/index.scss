@@ -1,0 +1,14 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_MENU_THEME_NAME: 'green-light' !default;
+$INOVUA_MENU_PRIMARY_COLOR: #8bb58d !default;
+
+@import '../../../../RadioButtonGroup/style/theme/green-light/index.scss';
+@import '../../../../ArrowScroller/style/theme/green-light/index.scss';
+
+@import '../default-light/index.scss';

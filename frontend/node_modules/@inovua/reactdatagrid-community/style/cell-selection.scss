@@ -1,0 +1,123 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.InovuaReactDataGrid__cell--cell-selected {
+  &,
+  &.InovuaReactDataGrid__cell--locked {
+    z-index: 10;
+  }
+}
+
+.InovuaReactDataGrid__cell--cell-active {
+  &,
+  &.InovuaReactDataGrid__cell--locked {
+    z-index: 20;
+  }
+}
+
+.InovuaReactDataGrid__cell--cell-active {
+  .InovuaReactDataGrid__cell__selection {
+    z-index: 100;
+  }
+}
+
+.InovuaReactDataGrid__cell--cell-selected:not(.InovuaReactDataGrid__cell--cell-active) {
+  &.InovuaReactDataGrid__cell--cell-has-top-selected-sibling
+    .InovuaReactDataGrid__cell__selection:after {
+    border-top-width: 0;
+  }
+
+  &.InovuaReactDataGrid__cell--cell-has-bottom-selected-sibling
+    .InovuaReactDataGrid__cell__selection:after {
+    border-bottom-width: 0;
+  }
+
+  &.InovuaReactDataGrid__cell--cell-has-left-selected-sibling
+    .InovuaReactDataGrid__cell__selection:after {
+    border-left-width: 0;
+  }
+
+  &.InovuaReactDataGrid__cell--cell-has-right-selected-sibling
+    .InovuaReactDataGrid__cell__selection:after {
+    border-right-width: 0;
+  }
+}
+
+.InovuaReactDataGrid__cell__selection {
+  z-index: 10;
+  position: absolute;
+  top: -1px;
+  bottom: 0;
+  right: -1px;
+  left: 0;
+  pointer-events: none;
+
+  &:after {
+    content: '';
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    left: 0;
+  }
+}
+
+.InovuaReactDataGrid__cell--show-border-bottom
+  > .InovuaReactDataGrid__cell__selection {
+  bottom: -1px;
+}
+
+.InovuaReactDataGrid__cell--show-border-left
+  > .InovuaReactDataGrid__cell__selection {
+  left: -1px;
+}
+
+.InovuaReactDataGrid__cell--show-border-right
+  > .InovuaReactDataGrid__cell__selection {
+  right: -1px;
+}
+
+.InovuaReactDataGrid__cell--show-border-top
+  > .InovuaReactDataGrid__cell__selection {
+  top: -1px;
+}
+
+.InovuaReactDataGrid__cell--locked-start.InovuaReactDataGrid__cell--first-in-section {
+  .InovuaReactDataGrid__cell__selection {
+    right: -2px;
+  }
+}
+
+.InovuaReactDataGrid__cell--locked-end {
+  &.InovuaReactDataGrid__cell--first-in-section {
+    .InovuaReactDataGrid__cell__selection {
+      // because of the 3px double border
+      left: -3px;
+    }
+  }
+}
+
+.InovuaReactDataGrid__cell__selection-dragger {
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+  cursor: crosshair;
+  pointer-events: all;
+  z-index: 10;
+  border-top: 1px solid white;
+  border-left: 1px solid white;
+
+  &--direction-ltr {
+    right: -2px;
+  }
+
+  &--direction-rtl {
+    left: -2px;
+  }
+}

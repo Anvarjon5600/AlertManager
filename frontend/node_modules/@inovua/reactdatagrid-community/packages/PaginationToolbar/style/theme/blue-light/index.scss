@@ -1,0 +1,16 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_PAGINATION_TOOLBAR_THEME_NAME: 'blue-light' !default;
+$INOVUA_PAGINATION_TOOLBAR_MAIN_COLOR: #4bacb8 !default;
+
+@import '../../../../ToolBar/style/theme/blue-light/index.scss';
+@import '../../../../NumericInput/style/theme/blue-light/index.scss';
+@import '../../../../ComboBox/style/theme/blue-light/index.scss';
+@import '../../../../Button/style/theme/blue-light/index.scss';
+
+@import '../default-light/index.scss';

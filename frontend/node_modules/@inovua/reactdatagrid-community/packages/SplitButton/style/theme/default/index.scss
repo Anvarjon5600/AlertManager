@@ -1,0 +1,250 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+@import './variables.scss';
+@import '../../../../Button/style/theme/default/index.scss';
+@import '../../../../Menu/style/theme/default/index.scss';
+
+/* stylelint-disable */
+@mixin apply-separator-styles($separatorColor, $separatorHoverColor) {
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--ltr.inovua-react-toolkit-button--icon-last {
+      .inovua-react-toolkit-button__icon-wrap {
+        border-left: 1px solid $separatorColor;
+      }
+    }
+
+    .inovua-react-toolkit-dropdown-button--expanded,
+    &:hover,
+    &:active {
+      .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--ltr.inovua-react-toolkit-button--icon-last {
+        .inovua-react-toolkit-button__icon-wrap {
+          border-left: 1px solid $separatorHoverColor;
+        }
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--ltr.inovua-react-toolkit-button--icon-first {
+    .inovua-react-toolkit-button__icon-wrap {
+      border-right: 1px solid $separatorColor;
+
+      &:hover:not(.inovua-react-toolkit-button__icon-wrap--disabled) {
+        border-right: 1px solid $separatorHoverColor;
+      }
+    }
+  }
+
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-dropdown-button--expanded,
+    &:hover,
+    &:active {
+      .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--ltr.inovua-react-toolkit-button--icon-first {
+        .inovua-react-toolkit-button__icon-wrap {
+          border-right: 1px solid $separatorHoverColor;
+        }
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--rtl.inovua-react-toolkit-button--icon-last {
+    .inovua-react-toolkit-button__icon-wrap {
+      border-right: 1px solid $separatorColor;
+
+      &:hover:not(.inovua-react-toolkit-button__icon-wrap--disabled) {
+        border-right: 1px solid $separatorHoverColor;
+      }
+    }
+  }
+
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-dropdown-button--expanded,
+    &:hover,
+    &:active {
+      .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--rtl.inovua-react-toolkit-button--icon-last {
+        .inovua-react-toolkit-button__icon-wrap {
+          border-right: 1px solid $separatorHoverColor;
+        }
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--rtl.inovua-react-toolkit-button--icon-first {
+    .inovua-react-toolkit-button__icon-wrap {
+      border-left: 1px solid $separatorColor;
+
+      &:hover:not(.inovua-react-toolkit-button__icon-wrap--disabled) {
+        border-left: 1px solid $separatorHoverColor;
+      }
+    }
+  }
+
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-dropdown-button--expanded,
+    &:hover,
+    &:active {
+      .inovua-react-toolkit-dropdown-button__button.inovua-react-toolkit-button--rtl.inovua-react-toolkit-button--icon-first {
+        .inovua-react-toolkit-button__icon-wrap {
+          border-left: 1px solid $separatorHoverColor;
+        }
+      }
+    }
+  }
+}
+/* stylelint-enable */
+
+.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--theme-#{$INOVUA_SPLIT_BUTTON_THEME_NAME} {
+  color: $INOVUA_SPLIT_BUTTON_COLOR;
+  fill: $INOVUA_SPLIT_BUTTON_FILL;
+  font-size: $INOVUA_SPLIT_BUTTON_FONT_SIZE;
+  min-height: 32px;
+  overflow: hidden;
+  border: $INOVUA_SPLIT_BUTTON_UNFOCUSED_BORDER;
+
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-split-button__icon-wrap:hover {
+      background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+    }
+  }
+
+  &.inovua-react-toolkit-split-button--focused {
+    border: $INOVUA_SPLIT_BUTTON_FOCUSED_BORDER;
+  }
+
+  .#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}__button {
+    padding: 4px 8px;
+    color: $INOVUA_SPLIT_BUTTON_COLOR;
+    font-size: $INOVUA_SPLIT_BUTTON_FONT_SIZE;
+    background: $INOVUA_SPLIT_BUTTON_BG_COLOR;
+
+    &:not(.inovua-react-toolkit-button--disabled) {
+      &:hover {
+        background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+      }
+
+      &:active {
+        background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+      }
+    }
+  }
+
+  &:not(.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--disabled) {
+    .inovua-react-toolkit-dropdown-button__button {
+      &:hover {
+        background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__button {
+    overflow: hidden;
+    background: $INOVUA_SPLIT_BUTTON_BG_COLOR;
+    fill: $INOVUA_SPLIT_BUTTON_FILL;
+  }
+
+  &.#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}--expanded
+    .inovua-react-toolkit-dropdown-button__button {
+    background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+  }
+
+  .#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}__button.inovua-react-toolkit-button--ltr {
+    &.inovua-react-toolkit-button--icon-first {
+      .inovua-react-toolkit-button__icon-wrap {
+        margin-right: 6px;
+      }
+    }
+
+    &.inovua-react-toolkit-button--icon-last {
+      .inovua-react-toolkit-button__icon-wrap {
+        margin-left: 6px;
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__button:not(.inovua-react-toolkit-button--disabled) {
+    .inovua-react-toolkit-button__icon-wrap {
+      &:hover:not(.inovua-react-toolkit-button__icon-wrap--disabled) {
+        background: $INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR;
+      }
+    }
+  }
+
+  /* stylelint-disable */
+  @include apply-separator-styles(
+    $INOVUA_SPLIT_BUTTON_SEPARATOR_COLOR,
+    $INOVUA_SPLIT_BUTTON_HOVER_SEPARATOR_COLOR
+  );
+  /* stylelint-enable */
+
+  .#{$INOVUA_SPLIT_BUTTON_ROOT_CLASS}__button.inovua-react-toolkit-button--rtl {
+    &.inovua-react-toolkit-button--icon-first {
+      .inovua-react-toolkit-button__icon-wrap {
+        margin-left: 6px;
+      }
+    }
+
+    &.inovua-react-toolkit-button--icon-last {
+      .inovua-react-toolkit-button__icon-wrap {
+        margin-right: 6px;
+      }
+    }
+  }
+
+  .inovua-react-toolkit-dropdown-button__arrow {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  .inovua-react-dropdown-button__button.inovua-react-toolkit-button--ltr {
+    &.inovua-react-toolkit-button--icon-first {
+      .inovua-react-toolkit-button__text {
+        padding-left: 0;
+      }
+
+      .inovua-react-toolkit-dropdown-button__arrow {
+        margin-right: 6px;
+        padding-left: 8px;
+      }
+    }
+
+    &.inovua-react-toolkit-button--icon-last {
+      .inovua-react-toolkit-button__text {
+        padding-right: 0;
+      }
+
+      .inovua-react-toolkit-dropdown-button__arrow {
+        margin-left: 6px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  .inovua-react-dropdown-button__button.inovua-react-toolkit-button--rtl {
+    &.inovua-react-toolkit-button--icon-first {
+      .inovua-react-toolkit-button__text {
+        padding-right: 0;
+      }
+
+      .inovua-react-toolkit-dropdown-button__arrow {
+        margin-left: 6px;
+        padding-right: 8px;
+      }
+    }
+
+    &.inovua-react-toolkit-button--icon-last {
+      .inovua-react-toolkit-button__text {
+        padding-left: 0;
+      }
+
+      .inovua-react-toolkit-dropdown-button__arrow {
+        margin-right: 6px;
+        padding-left: 8px;
+      }
+    }
+  }
+}

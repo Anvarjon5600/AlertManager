@@ -1,0 +1,54 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../react-scroll-container-pro/style/base.scss';
+
+.inovua-react-virtual-scroll-container {
+  overflow: hidden;
+  position: relative;
+  // needed because we have position: fixed in one of our layers
+  // and we need to create a layer so it is relative to this layer
+  backface-visibility: hidden;
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  & > .inovua-react-scroll-container .inovua-react-scroll-container__scrollbar {
+    z-index: 10000;
+  }
+
+  &__scroll-container {
+    flex: 1;
+  }
+
+  &--rtl {
+    direction: rtl;
+  }
+
+  &--native {
+    display: flex;
+    overflow: hidden;
+    align-items: stretch;
+    align-content: stretch;
+    flex-flow: column;
+    flex-wrap: nowrap;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.inovua-react-virtual-scroll-container__view {
+  flex: none;
+  width: 100%;
+}
+
+.inovua-react-virtual-scroll-container__scroll-container--avoid-repaint {
+  backface-visibility: hidden;
+}

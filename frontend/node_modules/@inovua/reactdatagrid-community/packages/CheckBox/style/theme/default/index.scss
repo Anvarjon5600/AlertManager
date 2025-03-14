@@ -1,0 +1,88 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables';
+
+.#{$INOVUA_CHECKBOX_ROOT_CLASS}.#{$INOVUA_CHECKBOX_ROOT_CLASS}--theme-#{$INOVUA_CHECKBOX_THEME_NAME} {
+  outline: none;
+  color: $INOVUA_CHECKBOX_COLOR;
+  font-size: $INOVUA_CHECKBOX_FONT_SIZE;
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--ltr {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__inner-content-wrapper {
+      margin-left: $INOVUA_CHECKBOX_MARGIN_LABEL;
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--rtl {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__inner-content-wrapper {
+      margin-right: $INOVUA_CHECKBOX_MARGIN_LABEL;
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--checked {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+      fill: $INOVUA_CHECKBOX_PRIMARY_COLOR;
+      stroke: $INOVUA_CHECKBOX_THIRD_COLOR;
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--unchecked {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+      stroke: $INOVUA_CHECKBOX_SECONDARY_COLOR;
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--indeterminate {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+      svg {
+        border-radius: 2px;
+        background: $INOVUA_CHECKBOX_PRIMARY_COLOR;
+      }
+      fill: $INOVUA_CHECKBOX_THIRD_COLOR;
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--browser-native {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--disabled {
+    color: rgba($INOVUA_CHECKBOX_COLOR, 0.5);
+
+    &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--checked {
+      .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+        fill: rgba($INOVUA_CHECKBOX_PRIMARY_COLOR, 0.5);
+        stroke: rgba($INOVUA_CHECKBOX_THIRD_COLOR, 0.5);
+      }
+    }
+
+    &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--unchecked {
+      .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+        stroke: rgba($INOVUA_CHECKBOX_SECONDARY_COLOR, 0.5);
+      }
+    }
+
+    &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--indeterminate {
+      .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+        svg {
+          border-radius: 2px;
+          background: rgba($INOVUA_CHECKBOX_PRIMARY_COLOR, 0.5);
+        }
+        fill: rgba($INOVUA_CHECKBOX_THIRD_COLOR, 0.5);
+      }
+    }
+  }
+
+  &.#{$INOVUA_CHECKBOX_ROOT_CLASS}--focused {
+    .#{$INOVUA_CHECKBOX_ROOT_CLASS}__icon-wrapper {
+      box-shadow: $INOVUA_CHECKBOX_FOCUS_SHADOW;
+      border-radius: 2px;
+    }
+  }
+}

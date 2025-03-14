@@ -1,0 +1,50 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__year-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  padding: 2px;
+  display: flex;
+  align-items: center;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__year-view-row {
+    min-height: 36px;
+    min-width: 144px;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__year-view-month {
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    max-height: 24px;
+    min-width: 40px;
+    max-width: 40px;
+    height: 24px;
+    border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+    margin: 1px;
+
+    &:hover {
+      background: $INOVUA_CALENDAR_DAY_COLOR_HOVER;
+      color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+    }
+
+    &--disabled {
+      color: $INOVUA_CALENDAR_DAY_COLOR_DISABLED;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__year-view-month--value {
+    color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+    background: $INOVUA_CALENDAR_DAY_COLOR_ACTIVE padding-box;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__year-view-month--active.#{$INOVUA_CALENDAR_ROOT_CLASS}__date-format-spinner__year-view-month--value {
+    background: lighten($INOVUA_CALENDAR_ACTIVE_COLOR, 5%) padding-box;
+  }
+}

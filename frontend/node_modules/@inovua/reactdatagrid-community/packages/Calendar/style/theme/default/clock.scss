@@ -1,0 +1,27 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__clock--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-center {
+    background: $INOVUA_CALENDAR_ACTIVE_BORDER_COLOR;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-overlay {
+    background: white;
+    border-style: solid;
+    border-color: $INOVUA_CALENDAR_ICON_COLOR;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-hand,
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-tick {
+    background: $INOVUA_CALENDAR_ICON_COLOR;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-hand-second {
+    background: red;
+  }
+}

@@ -1,0 +1,66 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+@import '../../CheckBox/style/base.scss';
+
+.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS} {
+  user-select: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  outline: none;
+  vertical-align: middle;
+
+  &--inline-block {
+    display: inline-flex;
+  }
+
+  &__icon-wrapper {
+    display: flex; // makes the checkicon on middle
+    svg {
+      display: block;
+    }
+  }
+
+  &--children-position-start {
+    flex-flow: row-reverse;
+  }
+
+  &--rtl {
+    direction: rtl;
+  }
+
+  &--ltr.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-end,
+  &--rtl.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-start {
+    .#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}__icon-wrapper {
+      margin-right: 5px;
+    }
+  }
+
+  &--rtl.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-end,
+  &--ltr.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-start {
+    .#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}__icon-wrapper {
+      margin-left: 5px;
+    }
+  }
+
+  &--read-only {
+    cursor: auto;
+  }
+
+  &--disabled {
+    cursor: auto;
+    pointer-events: none;
+  }
+}
+
+.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--browser-native {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}

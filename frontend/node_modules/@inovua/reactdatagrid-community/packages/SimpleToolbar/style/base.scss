@@ -1,0 +1,56 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../Flex/style/index.scss';
+
+.inovua-react-simple-toolbar {
+  box-sizing: border-box;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  display: inline-flex;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &--orientation-horizontal {
+    width: 100%;
+    flex-flow: row;
+    align-items: center; //so items are centered vertically
+    align-content: stretch;
+  }
+
+  &--orientation-vertical {
+    height: '100%';
+    flex-flow: 'column';
+    align-items: 'stretch';
+    align-content: 'center';
+  }
+}
+
+.inovua-react-simple-toolbar__region {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  &--text-align-start {
+    text-align: start;
+  }
+
+  &--text-align-end {
+    text-align: end;
+  }
+
+  &--text-align-center {
+    text-align: center;
+  }
+}

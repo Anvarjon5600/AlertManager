@@ -1,0 +1,40 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../Menu/style/base.scss';
+@import '../../Button/style/base.scss';
+@import './variables.scss';
+
+.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS} {
+  position: relative;
+  display: inline-flex;
+  vertical-align: middle;
+
+  .inovua-react-toolkit-dropdown-button__arrow,
+  .inovua-react-toolkit-button__icon-wrap {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+  }
+
+  // needs to be nested so it is not overwritten by
+  // default menu style
+  .#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}__menu {
+    z-index: 1000;
+    position: fixed; // this needs to be fixed, as we want
+    // the menu of the DDButton to be visible even when it's placed in a
+    // toolbar or a container with overflow: hidden.
+    backface-visibility: hidden;
+  }
+}
+
+.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}__arrow {
+  svg {
+    vertical-align: middle;
+    display: inline-block;
+  }
+}

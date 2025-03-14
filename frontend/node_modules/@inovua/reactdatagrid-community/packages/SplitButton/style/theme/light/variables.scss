@@ -1,0 +1,20 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+
+$INOVUA_SPLIT_BUTTON_THEME_NAME: 'light';
+$INOVUA_SPLIT_BUTTON_BG_COLOR: #e4e7ed;
+$INOVUA_SPLIT_BUTTON_HOVER_BG_COLOR: lighten($INOVUA_SPLIT_BUTTON_BG_COLOR, 3%);
+$INOVUA_SPLIT_BUTTON_UNFOCUSED_BORDER: 1px solid transparent;
+$INOVUA_SPLIT_BUTTON_FOCUSED_BORDER: 1px dotted #3c5c99;
+$INOVUA_SPLIT_BUTTON_SEPARATOR_COLOR: #fff;
+$INOVUA_SPLIT_BUTTON_HOVER_SEPARATOR_COLOR: #fff;
+
+$INOVUA_SPLIT_BUTTON_COLOR: #495e85;
+$INOVUA_SPLIT_BUTTON_FILL: $INOVUA_SPLIT_BUTTON_COLOR;
+$INOVUA_SPLIT_BUTTON_FONT_SIZE: 14px;

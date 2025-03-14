@@ -1,0 +1,29 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.InovuaReactDataGrid__column-header__filter-wrapper {
+  display: flex;
+  flex-flow: row;
+  align-items: stretch;
+
+  > * {
+    min-width: 0;
+  }
+
+  > *:first-child {
+    flex: 1;
+  }
+}
+
+.InovuaReactDataGrid__column-header__filter {
+  flex: 1;
+  align-self: center;
+
+  &--bool {
+    justify-content: center;
+  }
+}

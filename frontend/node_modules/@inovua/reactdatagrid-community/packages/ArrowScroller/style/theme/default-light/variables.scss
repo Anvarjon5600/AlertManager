@@ -1,0 +1,19 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_ARROW_SCROLLER_THEME_NAME: 'default-light' !default;
+
+$INOVUA_ARROW_SCROLLER_PRIMARY_COLOR: #7986cb !default;
+
+$INOVUA_ARROW_SCROLLER_BORDER_COLOR: #e4e3e2 !default;
+$INOVUA_ARROW_SCROLLER_BG_COLOR: #fff !default;
+$INOVUA_ARROW_SCROLLER_HOVER_BG: rgba(
+  $INOVUA_ARROW_SCROLLER_PRIMARY_COLOR,
+  0.15
+) !default;
+$INOVUA_ARROW_SCROLLER_FILL: #99a1aa !default;
+$INOVUA_ARROW_SCROLLER_HOVER_FILL: #e8e8e8 !default;

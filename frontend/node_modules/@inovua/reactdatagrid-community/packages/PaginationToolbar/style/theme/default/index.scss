@@ -1,0 +1,102 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+@import '../../../../ToolBar/style/theme/default/index.scss';
+@import '../../../../NumericInput/style/theme/default/index.scss';
+@import '../../../../ComboBox/style/theme/default/index.scss';
+@import '../../../../Button/style/theme/default/index.scss';
+
+.#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}.#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}--theme-#{$INOVUA_PAGINATION_TOOLBAR_THEME_NAME} {
+  padding: 2px 4px 2px 4px;
+  background: $INOVUA_PAGINATION_TOOLBAR_BG;
+  fill: $INOVUA_PAGINATION_TOOLBAR_ICON_FILL_COLOR;
+
+  &,
+  input {
+    color: $INOVUA_PAGINATION_TOOLBAR_COLOR;
+    font-size: $INOVUA_PAGINATION_TOOLBAR_FONT_SIZE;
+  }
+
+  &.#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}--bordered {
+    border: $INOVUA_PAGINATION_TOOLBAR_BORDERED_BORDER;
+  }
+
+  .#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}__per-page-text {
+    margin-left: 8px;
+  }
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS} {
+    &:not(.inovua-react-toolkit-dropdown-button__button):not(.inovua-react-toolkit-split-button__button) {
+      padding: 2px;
+      border-radius: 1px;
+      border: 1px solid transparent;
+    }
+  }
+
+  .inovua-react-toolkit-numeric-input--theme-#{$INOVUA_PAGINATION_TOOLBAR_THEME_NAME},
+  .inovua-react-toolkit-combo-box--theme-#{$INOVUA_PAGINATION_TOOLBAR_THEME_NAME},
+  .inovua-react-toolkit-combo-box--theme-#{$INOVUA_PAGINATION_TOOLBAR_THEME_NAME}
+    .inovua-react-toolkit-combo-box__list,
+  input:not(.inovua-react-toolkit-numeric-input__input) {
+    border: 1px solid $INOVUA_PAGINATION_TOOLBAR_BORDER_COLOR;
+    outline: none;
+  }
+
+  .inovua-react-toolkit-combo-box--focus.inovua-react-toolkit-combo-box--theme-#{$INOVUA_PAGINATION_TOOLBAR_THEME_NAME},
+  .inovua-react-toolkit-numeric-input.inovua-react-toolkit-numeric-input--focused,
+  input:not(.inovua-react-toolkit-numeric-input__input):focus {
+    border: 1px solid $INOVUA_PAGINATION_TOOLBAR_FOCUSED_INPUT_BORDER_COLOR;
+  }
+
+  .inovua-react-toolkit-toolbar__separator {
+    background: $INOVUA_PAGINATION_TOOLBAR_BORDER_COLOR;
+    margin: 7px 8px;
+  }
+
+  .#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}__page-size-combo {
+    background: $INOVUA_PAGINATION_TOOLBAR_PAGE_SIZE_COMBO_BG;
+    margin-right: 8px;
+  }
+
+  .inovua-react-pagination-toolbar__region {
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    .#{$INOVUA_PAGINATION_TOOLBAR_ROOT_CLASS}__icon {
+      user-select: none;
+      fill: $INOVUA_PAGINATION_TOOLBAR_ICON_FILL_COLOR;
+
+      &.#{$INOVUA_BUTTON_ROOT_CLASS}--over:not(.inovua-react-pagination-toolbar__icon--disabled) {
+        &.#{$INOVUA_BUTTON_ROOT_CLASS} {
+          background: $INOVUA_PAGINATION_TOOLBAR_ICON_HOVER_BG_COLOR;
+          &:hover {
+            background: $INOVUA_PAGINATION_TOOLBAR_ICON_HOVER_BG_COLOR;
+          }
+        }
+      }
+
+      &--focused {
+        background: $INOVUA_PAGINATION_TOOLBAR_ICON_FOCUSED_BG_COLOR;
+      }
+
+      &--named--FIRST_PAGE {
+        margin-left: 4px;
+        margin-right: 3px;
+      }
+
+      &--named--NEXT_PAGE {
+        margin-right: 3px;
+      }
+
+      &--named--REFRESH {
+        margin-right: 8px;
+      }
+    }
+  }
+}

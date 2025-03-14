@@ -1,0 +1,21 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__input--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  border: none;
+  outline: none;
+  padding-left: 8px;
+  min-height: 28px;
+  color: $INOVUA_CALENDAR_WEEK_DAYS_FONT_COLOR;
+  font-size: $INOVUA_CALENDAR_WEEK_DAYS_FONT_SIZE;
+  background: $INOVUA_CALENDAR_CLOCK_INPUT_BACKGROUND;
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__input--disabled {
+    background: $INOVUA_CALENDAR_CLOCK_INPUT_DISABLED_BACKGROUND;
+    color: $INOVUA_CALENDAR_CLOCK_INPUT_DISABLED_COLOR;
+  }
+}

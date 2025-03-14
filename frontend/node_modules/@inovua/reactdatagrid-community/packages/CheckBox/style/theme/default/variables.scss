@@ -1,0 +1,21 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables';
+
+$INOVUA_CHECKBOX_THEME_NAME: 'default' !default;
+$INOVUA_CHECKBOX_FONT_SIZE: 14px !default;
+$INOVUA_CHECKBOX_COLOR: #525252 !default;
+
+$INOVUA_CHECKBOX_PRIMARY_COLOR: #495e85 !default;
+$INOVUA_CHECKBOX_SECONDARY_COLOR: #a5a5a5 !default;
+$INOVUA_CHECKBOX_THIRD_COLOR: #a5a5a5 !default;
+
+$INOVUA_CHECKBOX_MARGIN_LABEL: 8px !default;
+
+$INOVUA_CHECKBOX_FOCUS_SHADOW: 0 0 0 3px
+  rgba($INOVUA_CHECKBOX_PRIMARY_COLOR, 0.5) !default;

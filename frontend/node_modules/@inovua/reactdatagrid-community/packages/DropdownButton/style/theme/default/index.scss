@@ -1,0 +1,87 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+@import './variables.scss';
+@import '../../../../Menu/style/theme/default/index.scss';
+@import '../../../../Button/style/theme/default/index.scss';
+
+.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}--theme-#{$INOVUA_DROPDOWN_BUTTON_THEME_NAME} {
+  color: $INOVUA_DROPDOWN_BUTTON_COLOR;
+  fill: $INOVUA_DROPDOWN_BUTTON_FILL;
+  font-size: $INOVUA_DROPDOWN_BUTTON_FONT_SIZE;
+
+  .inovua-react-toolkit-button__text {
+    padding: 4px 8px;
+  }
+
+  &:not(.inovua-react-toolkit-split-button__dropdown-button) {
+    background: $INOVUA_DROPDOWN_BUTTON_BG_COLOR padding-box;
+    min-height: 32px;
+    padding: 2px 0;
+
+    &:not(.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}--disabled).#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}--expanded,
+    &:not(.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}--disabled):active,
+    &:not(.#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}--disabled):hover {
+      background: $INOVUA_DROPDOWN_BUTTON_HOVER_BG_COLOR padding-box;
+    }
+
+    border: $INOVUA_DROPDOWN_BUTTON_UNFOCUSED_BORDER;
+
+    &.inovua-react-toolkit-dropdown-button--focused {
+      border: $INOVUA_DROPDOWN_BUTTON_FOCUSED_BORDER;
+    }
+
+    .#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}__button.inovua-react-toolkit-button--ltr {
+      &.inovua-react-toolkit-button--icon-first {
+        .inovua-react-toolkit-button__text {
+          padding-left: 0;
+        }
+
+        .inovua-react-toolkit-dropdown-button__arrow {
+          margin-right: 6px;
+          padding-left: 8px;
+        }
+      }
+
+      &.inovua-react-toolkit-button--icon-last {
+        .inovua-react-toolkit-button__text {
+          padding-right: 0;
+        }
+
+        .inovua-react-toolkit-dropdown-button__arrow {
+          margin-left: 6px;
+          padding-right: 2px;
+        }
+      }
+    }
+
+    .#{$INOVUA_DROPDOWN_BUTTON_ROOT_CLASS}__button.inovua-react-toolkit-button--rtl {
+      &.inovua-react-toolkit-button--icon-first {
+        .inovua-react-toolkit-button__text {
+          padding-right: 0;
+        }
+
+        .inovua-react-toolkit-dropdown-button__arrow {
+          margin-left: 6px;
+          padding-right: 2px;
+        }
+      }
+
+      &.inovua-react-toolkit-button--icon-last {
+        .inovua-react-toolkit-button__text {
+          padding-left: 0;
+        }
+
+        .inovua-react-toolkit-dropdown-button__arrow {
+          margin-right: 6px;
+          padding-left: 8px;
+        }
+      }
+    }
+  }
+}

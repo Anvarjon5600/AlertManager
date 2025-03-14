@@ -1,0 +1,24 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+
+$INOVUA_RADIO_BUTTON_GROUP_THEME_NAME: 'default-dark' !default;
+$INOVUA_RADIO_BUTTON_GROUP_PRIMARY_COLOR: #7986cb !default;
+
+$INOVUA_RADIO_BUTTON_SECONDARY_COLOR: #737f8b !default;
+
+$INOVUA_RADIO_BUTTON_COLOR: #9ba7b4 !default;
+$INOVUA_RADIO_BUTTON_COLOR_ACTIVE: #c5cae9 !default;
+$INOVUA_RADIO_BUTTON_COLOR_DISABLED: #5e666f !default;
+
+$INOVUA_RADIO_BUTTON_DISABLED_COLOR: #4e565e !default;
+
+$INOVUA_RADIO_BUTTON_CHECKED_BOX_SHADOW: 0 0 0 3px
+  rgba($INOVUA_RADIO_BUTTON_GROUP_PRIMARY_COLOR, 0.3) !default;
+
+$INOVUA_RADIO_BUTTON_GROUP_MARGIN: 4px !default;

@@ -1,0 +1,82 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  padding: 0 2px;
+  font-size: $INOVUA_CALENDAR_HEADER_FONT_SIZE;
+  background: $INOVUA_CALENDAR_HEADER_BACKGROUND;
+  color: $INOVUA_CALENDAR_HEADER_FONT_COLOR;
+  border-radius: 1px;
+  fill: $INOVUA_CALENDAR_ICON_COLOR;
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-month-decade-view-modal {
+    background: $INOVUA_CALENDAR_MONTH_DECADE_VIEW_MODAL_BACKGROUND;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-arrows-pos {
+    min-height: 32px;
+    min-width: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+
+    &:hover {
+      fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR_HOVER;
+      background: $INOVUA_CALENDAR_NAV_BAR_ARROW_BACKGROUND_HOVER;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-date {
+    min-height: 32px;
+    height: 32px;
+    padding: 2px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-arrows-div {
+    display: inline-flex;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-month-decade-view {
+    background: $INOVUA_DATE_INPUT_PICKER_BACKGROUND;
+    display: flex;
+    align-items: center;
+  }
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar--with-month-decade-view {
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-date {
+      cursor: pointer;
+    }
+
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-date-disabled {
+      cursor: initial;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-arrow {
+    fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 0;
+    transform: translateY(0);
+
+    &--disabled {
+      fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR_DISABLED;
+    }
+
+    &:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-arrows-pos--disabled) {
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+}

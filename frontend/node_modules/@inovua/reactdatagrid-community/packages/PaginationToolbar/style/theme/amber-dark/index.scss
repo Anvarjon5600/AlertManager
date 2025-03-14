@@ -1,0 +1,16 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_PAGINATION_TOOLBAR_THEME_NAME: 'amber-dark' !default;
+$INOVUA_PAGINATION_TOOLBAR_MAIN_COLOR: #caae53 !default;
+
+@import '../../../../ToolBar/style/theme/amber-dark/index.scss';
+@import '../../../../NumericInput/style/theme/amber-dark/index.scss';
+@import '../../../../ComboBox/style/theme/amber-dark/index.scss';
+@import '../../../../Button/style/theme/amber-dark/index.scss';
+
+@import '../default-dark/index.scss';

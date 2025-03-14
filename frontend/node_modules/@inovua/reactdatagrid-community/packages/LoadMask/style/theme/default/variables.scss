@@ -1,0 +1,15 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+
+$INOVUA_LOAD_MASK_THEME_NAME: 'default' !default;
+$INOVUA_LOAD_MASK_MAIN_COLOR: #495e85 !default;
+$INOVUA_LOAD_MASK_BG: rgba($INOVUA_LOAD_MASK_MAIN_COLOR, 0.5) !default;
+$INOVUA_LOAD_MASK_SECONDARY_COLOR: rgba(#000, 0.2) !default;
+$INOVUA_LOAD_MASK_INNER_BG: #fff !default;
+$INOVUA_LOAD_MASK_INNER_LAYER: rgba($INOVUA_LOAD_MASK_MAIN_COLOR, 0.3) !default;

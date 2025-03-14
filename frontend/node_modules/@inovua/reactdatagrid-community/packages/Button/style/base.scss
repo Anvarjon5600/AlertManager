@@ -1,0 +1,198 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_BUTTON_ROOT_CLASS} {
+  &,
+  &:before,
+  &:after,
+  & *,
+  & *:before,
+  & *:after {
+    box-sizing: border-box;
+  }
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0;
+  font-family: inherit;
+  user-select: none;
+  text-align: start;
+  vertical-align: middle;
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: row;
+  border: none;
+  align-items: center;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+button.#{$INOVUA_BUTTON_ROOT_CLASS} {
+  padding: 0;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+  flex: 1 0 0%;
+  // the rule is for IE10 / IE11
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    flex: 1 0 auto;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}__icon-wrap {
+  display: flex;
+  flex-flow: row;
+}
+
+// states
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--disabled {
+  cursor: default;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--overflow-visible {
+  overflow: visible;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--overflow-hidden {
+  overflow: hidden;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--ellipsis {
+  &,
+  // when ellipsis and wrap: true, make ellipsis win
+  &.#{$INOVUA_BUTTON_ROOT_CLASS}--wrap,
+  &.#{$INOVUA_BUTTON_ROOT_CLASS}--wrap .#{$INOVUA_BUTTON_ROOT_CLASS}__text,
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--nowrap {
+  &,
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    white-space: nowrap;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--wrap {
+  &,
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    white-space: normal;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--rtl {
+  direction: rtl;
+}
+
+// align
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-center {
+  justify-content: center;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: center;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-start:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom) {
+  justify-content: flex-start;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: start;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-start.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-start.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  align-items: flex-start;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: start;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-end:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom) {
+  justify-content: flex-end;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: end;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-end.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-end.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  align-items: flex-end;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: end;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-left {
+  justify-content: flex-start;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: left;
+  }
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--align-right {
+  justify-content: flex-end;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    text-align: right;
+  }
+}
+
+// vertical-align
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-middle:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom),
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-center:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom) {
+  align-items: center;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-middle.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-middle.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-center.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-center.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  justify-content: center;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-top:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom) {
+  align-items: flex-start;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-top.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-top.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  justify-content: flex-start;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-bottom:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top):not(.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom) {
+  align-items: flex-end;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-bottom.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--vertical-align-bottom.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  justify-content: flex-end;
+}
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-top,
+.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-position-bottom {
+  display: inline-flex;
+  flex-direction: column;
+
+  .#{$INOVUA_BUTTON_ROOT_CLASS}__text {
+    flex: none;
+  }
+}

@@ -1,0 +1,83 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar {
+  box-sizing: border-box;
+  outline: none;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  &-date {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  svg {
+    vertical-align: middle;
+  }
+
+  &-month-decade-view-modal {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+  }
+
+  &-month-decade-view {
+    z-index: 100;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-month-decade-view-month {
+    left: 0;
+  }
+
+  &-month-decade-view-calendar {
+    left: 0;
+  }
+
+  &-month-decade-view-show-animation {
+    visibility: visible;
+    animation: inovua-react-toolkit-calendar-month-decade-view-animation-fade-in
+      0.3s;
+  }
+
+  @keyframes inovua-react-toolkit-calendar-month-decade-view-animation-fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__nav-bar-arrow {
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+
+  &--disabled {
+    fill: #bfbfbf;
+    cursor: default;
+  }
+}

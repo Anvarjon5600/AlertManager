@@ -1,0 +1,90 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__calendar--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  &.#{$INOVUA_DATE_INPUT_ROOT_CLASS}__picker {
+    box-shadow: $INOVUA_DATE_INPUT_PICKER_BOX_SHADOW;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__calendar--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+    border: none;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock {
+    margin: 8px 14px 32px 8px;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-input {
+    margin-left: 4px;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-input-spinner {
+    border: 1px solid $INOVUA_CALENDAR_CLOCK_INPUT_BACKGROUND;
+    margin-right: 14px;
+    border-radius: 1px;
+    background: $INOVUA_CALENDAR_CLOCK_INPUT_BACKGROUND;
+    cursor: pointer;
+
+    &:hover {
+      margin-right: 14px;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-input-spinner--focused {
+    border: 1px solid $INOVUA_CALENDAR_MAIN_COLOR;
+    background: $INOVUA_CALENDAR_CLOCK_INPUT_BACKGROUND;
+    box-shadow: $INOVUA_CALENDAR_CLOCK_INPUT_FOCUS_BOX_SHADOW;
+    margin-right: 14px;
+    border-radius: 1px;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-input-spinner-arrow-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__clock-input-spinner-arrow {
+      fill: $INOVUA_CALENDAR_ICON_COLOR;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 15px;
+      width: 24px;
+      position: relative;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 24px;
+      }
+
+      &--disabled {
+        fill: $INOVUA_CALENDAR_CLOCK_ICON_DISABLED_COLOR;
+      }
+
+      &:hover {
+        fill: $INOVUA_CALENDAR_ICON_COLOR_HOVER;
+
+        &::before {
+          background: $INOVUA_CALENDAR_CLOCK_INPUT_HOVER_BACKGROUND;
+        }
+      }
+
+      &:active {
+        fill: $INOVUA_CALENDAR_ICON_COLOR_HOVER;
+
+        &::before {
+          background: $INOVUA_CALENDAR_CLOCK_INPUT_ACTIVE_BACKGROUND;
+        }
+      }
+    }
+  }
+}

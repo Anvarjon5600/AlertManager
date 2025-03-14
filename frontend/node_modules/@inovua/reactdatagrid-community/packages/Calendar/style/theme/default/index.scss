@@ -1,0 +1,283 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+@import './field.scss';
+@import './clock.scss';
+@import './footer.scss';
+@import './spinner.scss';
+@import './year-view.scss';
+@import './decade-view.scss';
+@import './month-decade-view.scss';
+@import './navbar.scss';
+@import './picker.scss';
+@import './input.scss';
+
+@import '../../../../Button/style/theme/default/index.scss';
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__calendar--theme-#{$INOVUA_CALENDAR_THEME_NAME},
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME},
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__date-input--theme-#{$INOVUA_CALENDAR_THEME_NAME},
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__transition-month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  font-size: $INOVUA_CALENDAR_WEEK_DAYS_FONT_SIZE;
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__transition-month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  border: 1px solid $INOVUA_CALENDAR_VIEW_BORDER_COLOR;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME},
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__multi-month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME},
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__calendar--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+    border: none;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__navigation-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  border: 1px solid $INOVUA_CALENDAR_VIEW_BORDER_COLOR;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view,
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__multi-month-view {
+    border: none;
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  background: $INOVUA_DATE_INPUT_PICKER_BACKGROUND;
+  border: 1px solid $INOVUA_CALENDAR_VIEW_BORDER_COLOR;
+  border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+
+  &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-relative {
+    position: relative;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-row {
+    padding: 0 4px;
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-row:last-child {
+      margin-bottom: 4px;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-week-day-names {
+    color: $INOVUA_CALENDAR_WEEK_DAYS_COLOR;
+    font-size: $INOVUA_CALENDAR_OTHER_WEEK_DAYS_FONT_SIZE;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-week-number {
+    color: $INOVUA_CALENDAR_OTHER_MONTH_DAY_COLOR;
+    font-size: $INOVUA_CALENDAR_OTHER_WEEK_NUMBER_FONT_SIZE;
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-cell {
+      flex: none;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-cell {
+    min-width: $INOVUA_CALENDAR_DAY_SIZE;
+    min-height: $INOVUA_CALENDAR_DAY_SIZE;
+    margin: 1px;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day {
+    z-index: 10;
+    color: $INOVUA_CALENDAR_WEEK_DAYS_FONT_COLOR;
+    border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+    border: 2px solid transparent;
+    position: relative;
+
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+      cursor: pointer;
+      text-align: center;
+      outline: none;
+      width: 100%;
+      height: 100%;
+      min-width: $INOVUA_CALENDAR_DAY_SIZE;
+      min-height: $INOVUA_CALENDAR_DAY_SIZE;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+    }
+
+    &:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--today-highlight):hover {
+      background: $INOVUA_CALENDAR_DAY_COLOR_HOVER;
+    }
+
+    &--in-hover-range,
+    &--in-range {
+      overflow: hidden;
+
+      .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+        position: relative;
+
+        &:after,
+        &:before {
+          position: absolute;
+          height: 100%;
+          top: 0;
+          bottom: 0;
+          width: 500%;
+          z-index: -1;
+          content: '';
+        }
+
+        &:before {
+          right: 50%;
+        }
+
+        &:after {
+          left: 50%;
+        }
+      }
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-start,
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--range-start:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--in-hover-range) {
+        .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+          &:before {
+            display: none;
+          }
+        }
+      }
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-end,
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--range-end:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--in-hover-range) {
+        .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+          &:after {
+            display: none;
+          }
+        }
+      }
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-start:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-end) {
+        .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+          &:after {
+            display: inherit;
+          }
+        }
+      }
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-end:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--hover-range-start) {
+        .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+          &:before {
+            display: inherit;
+          }
+        }
+      }
+    }
+
+    &--in-range {
+      background: $INOVUA_CALENDAR_IN_RANGE_BACKGROUND;
+      color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+      border-radius: 0;
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--active {
+        background: $INOVUA_CALENDAR_IN_RANGE_BACKGROUND;
+      }
+
+      &:hover {
+        background: $INOVUA_CALENDAR_DAY_COLOR_HOVER;
+        border: 2px solid transparent;
+      }
+    }
+
+    &--range-start {
+      border-radius: 1px 0 0 1px;
+    }
+
+    &--range-end {
+      border-radius: 0 1px 1px 0;
+    }
+
+    &--today-highlight {
+      background: $INOVUA_CALENDAR_MAIN_COLOR;
+      color: $INVOUA_DATE_INPUT_TODAY_COLOR;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &:hover {
+        &::before {
+          background: rgba(0, 0, 0, 0.15);
+        }
+
+        border: 2px solid rgba(0, 0, 0, 0.15);
+      }
+
+      &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--active {
+        color: $INVOUA_DATE_INPUT_TODAY_COLOR;
+
+        .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+          background: $INOVUA_CALENDAR_MAIN_COLOR;
+          border: 2px solid $INOVUA_DATE_INPUT_PICKER_BACKGROUND;
+        }
+      }
+    }
+
+    &--active {
+      background: $INOVUA_DATE_INPUT_PICKER_BACKGROUND;
+      border: 2px solid $INOVUA_CALENDAR_MAIN_COLOR;
+      color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+
+      &:hover {
+        border: 2px solid $INOVUA_CALENDAR_MAIN_COLOR;
+      }
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--prev-month,
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--next-month {
+    color: $INOVUA_CALENDAR_OTHER_MONTH_DAY_COLOR;
+    font-size: $INOVUA_CALENDAR_WEEK_DAYS_FONT_SIZE;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--weekend-highlight {
+    color: $INOVUA_CALENDAR_WEEKEND_HIGHLIGHT_COLOR;
+
+    &:hover {
+      color: $INOVUA_CALENDAR_WEEKEND_HIGHLIGHT_COLOR;
+    }
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--prev-month,
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--next-month {
+      color: $INOVUA_CALENDAR_WEEKEND_OTHER_MONTH_HIGHLIGHT_COLOR;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--disabled {
+    color: $INOVUA_CALENDAR_DAY_COLOR_DISABLED;
+
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day-text {
+      cursor: default;
+
+      &:hover {
+        background: none;
+        color: $INOVUA_CALENDAR_DAY_COLOR_DISABLED;
+      }
+    }
+
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--prev-month,
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view-day--next-month {
+      color: $INOVUA_CALENDAR_DAY_COLOR_DISABLED;
+    }
+  }
+}
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__multi-month-view {
+  border: 1px solid $INOVUA_CALENDAR_VIEW_BORDER_COLOR;
+  position: relative;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__month-view {
+    border: none;
+  }
+}

@@ -1,0 +1,109 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS},
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS} * {
+  box-sizing: border-box;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS} {
+  display: inline-flex;
+  overflow: hidden;
+  background: white;
+  align-items: center;
+
+  &.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}--ltr {
+    padding: 0 0 0 8px;
+  }
+
+  &.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}--rtl {
+    padding: 0 8px 0 0;
+  }
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__number-input {
+  flex: 1;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__input::-ms-clear {
+  display: none;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__spinner-wrapper-hidden {
+  visibility: hidden;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__spinner-wrapper,
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__clear-button-wrapper {
+  display: flex;
+  flex-flow: column;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__clear-button-wrapper {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s;
+  transform: translate3d(
+    0,
+    0,
+    0px
+  ); // needed because otherwise chrome flickers the position of the wrapper
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__clear-button-wrapper--hidden {
+  visibility: hidden;
+  opacity: 0;
+  display: none;
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__clear-button {
+  cursor: pointer;
+  flex: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  top: 0;
+  right: 1px;
+  bottom: 0;
+
+  &:active {
+    margin-top: 1px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.#{$INOVUA_NUMERIC_INPUT_ROOT_CLASS}__spinner-arrow {
+  position: relative;
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
+}

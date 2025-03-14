@@ -1,0 +1,87 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_BUTTON_THEME_NAME: 'default' !default;
+
+@import '../../variables.scss';
+@import './variables.scss';
+
+.#{$INOVUA_BUTTON_ROOT_CLASS}.#{$INOVUA_BUTTON_ROOT_CLASS}--theme-#{$INOVUA_BUTTON_THEME_NAME} {
+  color: $INOVUA_BUTTON_COLOR;
+  fill: $INOVUA_BUTTON_FILL;
+  font-size: $INOVUA_BUTTON_FONT_SIZE;
+  border-radius: $INOVUA_BUTTON_BORDER_RADIUS;
+  transition: background 0.2s, transform 0.2s;
+
+  &:not(.inovua-react-toolkit-dropdown-button__button):not(.inovua-react-toolkit-split-button__button) {
+    background: $INOVUA_BUTTON_BG_COLOR padding-box;
+    transform: translateY(0);
+
+    &:not(.inovua-react-toolkit-button--disabled):active {
+      transform: translateY(1px);
+    }
+
+    &:not(.inovua-react-toolkit-button--disabled):hover {
+      background: $INOVUA_BUTTON_HOVER_BG_COLOR padding-box;
+    }
+
+    &:not(.inovua-react-toolkit-button--disabled).inovua-react-toolkit-button--pressed {
+      background: $INOVUA_BUTTON_PRESSED_BG_COLOR padding-box;
+
+      &:hover {
+        background: $INOVUA_BUTTON_PRESSED_HOVER_BG_COLOR padding-box;
+      }
+    }
+
+    border: $INOVUA_BUTTON_UNFOCUSED_BORDER;
+
+    &.inovua-react-toolkit-button--focused {
+      border: $INOVUA_BUTTON_FOCUSED_BORDER;
+      box-shadow: $INOVUA_BUTTON_BOX_SHADOW;
+      transition: border 0.2s;
+    }
+
+    min-height: $INOVUA_BUTTON_MIN_HEIGHT;
+    padding: $INOVUA_BUTTON_PADDING;
+  }
+
+  &.#{$INOVUA_BUTTON_ROOT_CLASS}--disabled {
+    color: $INOVUA_BUTTON_COLOR;
+    fill: $INOVUA_BUTTON_FILL;
+    opacity: 0.5;
+  }
+
+  &.#{$INOVUA_BUTTON_ROOT_CLASS}--has-icon:not(.#{$INOVUA_BUTTON_ROOT_CLASS}--no-children):not(.inovua-react-toolkit-dropdown-button__button):not(.inovua-react-toolkit-split-button__button) {
+    &.#{$INOVUA_BUTTON_ROOT_CLASS}--ltr {
+      &.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-first {
+        .#{$INOVUA_BUTTON_ROOT_CLASS}__icon-wrap {
+          margin-right: 6px;
+        }
+      }
+
+      &.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-last {
+        .#{$INOVUA_BUTTON_ROOT_CLASS}__icon-wrap {
+          margin-left: 6px;
+        }
+      }
+    }
+
+    &.#{$INOVUA_BUTTON_ROOT_CLASS}--rtl {
+      &.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-first {
+        .#{$INOVUA_BUTTON_ROOT_CLASS}__icon-wrap {
+          margin-left: 6px;
+        }
+      }
+
+      &.#{$INOVUA_BUTTON_ROOT_CLASS}--icon-last {
+        .#{$INOVUA_BUTTON_ROOT_CLASS}__icon-wrap {
+          margin-right: 6px;
+        }
+      }
+    }
+  }
+}

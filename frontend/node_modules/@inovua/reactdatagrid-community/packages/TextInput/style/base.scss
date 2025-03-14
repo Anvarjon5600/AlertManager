@@ -1,0 +1,94 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS} {
+  box-sizing: border-box;
+  text-align: start;
+  direction: ltr;
+  display: inline-flex;
+  border: 1px solid #c5c5c5;
+  overflow: hidden;
+  background: white;
+  align-items: center;
+
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &--rtl {
+    direction: rtl;
+
+    .#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__input {
+      padding: 0 8px 0 5px;
+    }
+
+    .#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__clear-button {
+      margin: 0 0 0 6px;
+    }
+  }
+}
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__input {
+  border: none;
+  outline: none;
+  background: none;
+  width: 100%;
+  height: 100%;
+  padding: 0 5px 0 8px;
+}
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__input::-ms-clear {
+  display: none;
+}
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__clear-button {
+  cursor: pointer;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  top: 0;
+  right: 1px;
+  bottom: 0;
+  margin: 0 6px 0 0;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__clear-button-wrapper {
+  visibility: visible;
+  transition: opacity 0.2s;
+  opacity: 1;
+  transform: translate3d(
+    0,
+    0,
+    0px
+  ); // needed because otherwise chrome flickers the position of the wrapper
+  &:active {
+    margin-top: 2px;
+  }
+}
+
+.#{$INOVUA_TEXT_INPUT_ROOT_CLASS}__clear-button-wrapper--hidden {
+  opacity: 0;
+  visibility: hidden;
+}

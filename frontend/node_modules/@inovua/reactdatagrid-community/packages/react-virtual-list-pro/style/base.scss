@@ -1,0 +1,23 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../../packages/react-virtual-scroll-container-pro/style/base.scss';
+
+.inovua-react-virtual-list {
+  box-sizing: border-box;
+
+  &:not(.inovua-react-virtual-list--virtual-scroll)
+    .inovua-react-scroll-container__scroller {
+    align-items: stretch;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,51 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+@import './variables.scss';
+@import '../../../../react-scroll-container-pro/style/theme/default/index.scss';
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}--theme-#{$INOVUA_ARROW_SCROLLER_THEME_NAME} {
+  .#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow {
+    background: $INOVUA_ARROW_SCROLLER_BG_COLOR;
+    fill: $INOVUA_ARROW_SCROLLER_FILL;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: transparent;
+    }
+
+    &:hover {
+      fill: $INOVUA_ARROW_SCROLLER_HOVER_FILL;
+      &:before {
+        background: $INOVUA_ARROW_SCROLLER_HOVER_BG;
+      }
+    }
+
+    &--direction-right {
+      border-left: 1px solid $INOVUA_ARROW_SCROLLER_BORDER_COLOR;
+    }
+
+    &--direction-left {
+      border-right: 1px solid $INOVUA_ARROW_SCROLLER_BORDER_COLOR;
+    }
+
+    &--direction-down {
+      border-top: 1px solid $INOVUA_ARROW_SCROLLER_BORDER_COLOR;
+    }
+
+    &--direction-up {
+      border-bottom: 1px solid $INOVUA_ARROW_SCROLLER_BORDER_COLOR;
+    }
+  }
+}

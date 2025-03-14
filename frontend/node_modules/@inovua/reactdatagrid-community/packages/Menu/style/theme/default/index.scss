@@ -1,0 +1,386 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import '../../variables.scss';
+@import './variables.scss';
+@import '../../../../RadioButtonGroup/style/theme/default/index.scss';
+@import '../../../../ArrowScroller/style/theme/default/index.scss';
+
+.#{$INOVUA_MENU_ROOT_CLASS}.#{$INOVUA_MENU_ROOT_CLASS}--theme-#{$INOVUA_MENU_THEME_NAME} {
+  font-size: $INOVUA_MENU_FONT_SIZE;
+  background-color: $INOVUA_MENU_BACKGROUND;
+  border: $INOVUA_MENU_BORDER;
+  color: $INOVUA_MENU_COLOR;
+  fill: $INOVUA_MENU_COLOR;
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--shadow {
+    box-shadow: $INOVUA_MENU_SHADOW;
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--rtl {
+    box-shadow: $INOVUA_MENU_SHADOW_RTL;
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--depth-1 {
+    background-color: $INOVUA_MENU_LEVEL_1_BACKGROUND;
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--depth-2 {
+    background-color: $INOVUA_MENU_LEVEL_2_BACKGROUND;
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--depth-3 {
+    background-color: $INOVUA_MENU_LEVEL_3_BACKGROUND;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__table {
+    padding: $INOVUA_MENU_ROOT_PADDING;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row {
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-expander {
+      .#{$INOVUA_MENU_ROOT_CLASS}__expander-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        .#{$INOVUA_MENU_ROOT_CLASS}__expander-icon {
+          border-radius: $INOVUA_MENU_BORDER_RADIUS;
+          width: 24px;
+          height: 24px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding-right: 14px;
+        }
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--focused.#{$INOVUA_MENU_ROOT_CLASS}__row--over {
+    position: relative;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--radio {
+    .inovua-react-toolkit-radio-button {
+      &--ltr.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-end,
+      &--rtl.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-start {
+        .#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}__icon-wrapper {
+          margin-right: 0;
+        }
+      }
+
+      &--rtl.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-end,
+      &--ltr.#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}--children-position-start {
+        .#{$INOVUA_RADIO_BUTTON_ROOT_CLASS}__icon-wrapper {
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--focused {
+    position: relative;
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__row--checked {
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell--radio {
+        .inovua-react-toolkit-radio-button__icon-wrapper {
+          border-radius: 10px;
+          box-shadow: $INOVUA_MENU_RADIO_BOX_SHADOW;
+        }
+      }
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+      position: relative;
+
+      // border 2
+      &:before {
+        position: absolute;
+        content: ' ';
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+        border-bottom: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+      }
+
+      &:first-child {
+        &:before {
+          left: 0;
+          border-left: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+        }
+      }
+
+      &:last-child {
+        &:before {
+          right: 0;
+          border-right: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+        }
+      }
+    }
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--rtl {
+    .#{$INOVUA_MENU_ROOT_CLASS}__row--focused.#{$INOVUA_MENU_ROOT_CLASS}__row--over {
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+        // border 1
+        &:before {
+          position: absolute;
+          content: ' ';
+          top: 1px;
+          bottom: 1px;
+          left: 0;
+          right: 0;
+          border-top: $INOVUA_MENU_ITEM_FOCUSED_OVER_BORDER;
+          border-bottom: $INOVUA_MENU_ITEM_FOCUSED_OVER_BORDER;
+        }
+
+        &:first-child {
+          &:before {
+            right: 1px;
+            border-right: $INOVUA_MENU_ITEM_FOCUSED_OVER_BORDER;
+          }
+        }
+
+        &:last-child {
+          &:before {
+            left: 1px;
+            border-left: $INOVUA_MENU_ITEM_FOCUSED_OVER_BORDER;
+          }
+        }
+      }
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__row--focused {
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+        // border 2
+        &:before {
+          right: -1px;
+          left: -1px;
+          border-top: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+          border-bottom: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+        }
+
+        &:first-child,
+        &:last-child {
+          &:before {
+            right: 0;
+            left: 0;
+          }
+        }
+
+        &:first-child {
+          &:before {
+            border-left: 0;
+            border-right: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+          }
+        }
+
+        &:last-child {
+          &:before {
+            border-right: 0;
+            border-left: $INOVUA_MENU_ITEM_FOCUSED_BORDER;
+          }
+        }
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--over {
+    color: $INOVUA_MENU-ITEM_OVER_COLOR;
+    fill: $INOVUA_MENU-ITEM_OVER_COLOR;
+    background-color: $INOVUA_MENU_HOVER_COLOR;
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+      background-color: $INOVUA_MENU_HOVER_COLOR;
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-expander {
+      .#{$INOVUA_MENU_ROOT_CLASS}__expander {
+        fill: $INOVUA_MENU_ICON_HOVER_COLOR;
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--active {
+    color: $INOVUA_MENU_ITEM_ACTIVE_COLOR;
+    fill: $INOVUA_MENU_ITEM_ACTIVE_COLOR;
+    background-color: $INOVUA_MENU_ITEM_ACTIVE_BACKGROUND;
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+      background-color: $INOVUA_MENU_HOVER_COLOR;
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--disabled {
+    color: $INOVUA_MENU_ITEM_DISABLED_COLOR;
+    fill: $INOVUA_MENU_ITEM_DISABLED_COLOR;
+    cursor: not-allowed;
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell--icon {
+      fill: $INOVUA_MENU_ITEM_DISABLED_COLOR;
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell--secondaryLabel {
+      color: $INOVUA_MENU_ITEM_DISABLED_COLOR;
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-expander {
+      .#{$INOVUA_MENU_ROOT_CLASS}__expander {
+        fill: $INOVUA_MENU_ITEM_DISABLED_COLOR;
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+    padding: $INOVUA_MENU_CELL_PADDING;
+    height: $INOVUA_MENU_CELL_HEIGHT;
+    vertical-align: middle;
+
+    &:first-child {
+      padding: $INOVUA_MENU_CELL_PADDING_FIRST_CHILD;
+    }
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--ltr {
+      &:last-child {
+        padding-right: $INOVUA_MENU_LAST_CELL_PADDING_RIGHT;
+      }
+    }
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--rtl {
+      &:last-child {
+        padding-left: $INOVUA_MENU_LAST_CELL_PADDING_RIGHT;
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-input {
+    line-height: 16px;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-input.#{$INOVUA_MENU_ROOT_CLASS}__cell--ltr {
+    padding-right: 0;
+    padding-left: $INOVUA_MENU_FIRST_CELL_PADDING_LEFT;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--has-input.#{$INOVUA_MENU_ROOT_CLASS}__cell--rtl {
+    padding-left: 0;
+    padding-right: $INOVUA_MENU_FIRST_CELL_PADDING_LEFT;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--radio {
+    fill: $INOVUA_MENU_ICON_COLOR;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--radio,
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--checkbox {
+    fill: $INOVUA_MENU_ICON_COLOR;
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell__input {
+      position: relative;
+      top: 0;
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell__input--browser-native {
+      top: 0;
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell--secondaryLabel {
+    color: $INOVUA_MENU_DESCRIPTION_COLOR;
+    padding-right: 6px;
+    text-align: end;
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--ltr {
+      padding-right: 6px;
+    }
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--rtl {
+      padding-left: 6px;
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell.#{$INOVUA_MENU_ROOT_CLASS}__cell--icon {
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--ltr {
+      padding-right: 3px;
+    }
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--rtl {
+      padding-left: 3px;
+    }
+
+    svg {
+      vertical-align: middle;
+    }
+  }
+
+  // rtl
+  &.#{$INOVUA_MENU_ROOT_CLASS}--rtl
+    .#{$INOVUA_MENU_ROOT_CLASS}__cell.#{$INOVUA_MENU_ROOT_CLASS}__cell--icon {
+    padding-right: 12px;
+    padding-left: 3px;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__cell.#{$INOVUA_MENU_ROOT_CLASS}__cell--has-expander {
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--ltr {
+      padding-right: 0;
+    }
+
+    &.#{$INOVUA_MENU_ROOT_CLASS}__cell--rtl {
+      padding-left: 0;
+    }
+
+    text-align: right;
+    text-align: end;
+    fill: $INOVUA_MENU_EXPANDER_FILL;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__menu-separator {
+    td {
+      padding: $INOVUA_MENU_MENU_SEPARATOR_PADDING 0;
+      .#{$INOVUA_MENU_ROOT_CLASS}__menu-separator__tool {
+        background-color: $INOVUA_MENU_SEPARATOR_COLOR;
+      }
+    }
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__menu-separator__tool {
+    background: $INOVUA_MENU_SEPARATOR_TOOL_BACKGROUND;
+    height: $INOVUA_MENU_SEPARATOR_TOOL_SIZE;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row--title {
+    font-weight: 600;
+    cursor: initial;
+  }
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--mobile {
+    .#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow {
+      height: $INOVUA_MENU_MOBILE_SCROLL_ARROW_HEIGHT;
+    }
+  }
+
+  @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+    .#{$INOVUA_MENU_ROOT_CLASS}__row--focused {
+      color: $INOVUA_MENU-ITEM_OVER_COLOR;
+      fill: $INOVUA_MENU-ITEM_OVER_COLOR;
+      background-color: $INOVUA_MENU_ITEM_OVER_BACKGROUND;
+      border: $INOVUA_MENU_ITEM_OVER_BORDER;
+
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell {
+        background-color: $INOVUA_MENU_ITEM_OVER_BACKGROUND;
+      }
+    }
+
+    .#{$INOVUA_MENU_ROOT_CLASS}__row--focused
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell:before,
+    .#{$INOVUA_MENU_ROOT_CLASS}__row--focused.#{$INOVUA_MENU_ROOT_CLASS}__row--over
+      .#{$INOVUA_MENU_ROOT_CLASS}__cell:before {
+      content: none;
+    } /* IE11 */
+  }
+}

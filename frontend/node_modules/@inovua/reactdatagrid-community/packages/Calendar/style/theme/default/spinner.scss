@@ -1,0 +1,32 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__date-format-spinner--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  border: 1px solid gray;
+
+  input {
+    padding: 5px;
+    border: none;
+    outline: none;
+  }
+
+  &:not([disabled]) {
+    &.#{$INOVUA_CALENDAR_ROOT_CLASS}__date-format-spinner--focused {
+      border: 1px solid $INOVUA_CALENDAR_ACTIVE_COLOR;
+    }
+
+    .#{$INOVUA_CALENDAR_ROOT_CLASS}__date-format-spinner-arrow {
+      transform: translateY(0);
+      cursor: pointer;
+
+      &:active {
+        fill: $INOVUA_CALENDAR_ACTIVE_COLOR;
+        transform: translateY(1px);
+      }
+    }
+  }
+}

@@ -1,0 +1,150 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+@import '../../ArrowScroller/style/base.scss';
+@import '../../CheckBox/style/base.scss';
+@import '../../RadioButton/style/base.scss';
+
+.#{$INOVUA_MENU_ROOT_CLASS} {
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  display: inline-flex;
+  position: relative;
+}
+
+// scroll
+
+.#{$INOVUA_MENU_ROOT_CLASS}__arrow {
+  position: absolute;
+  background: none;
+  padding: 0;
+  border: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  svg {
+    height: 13px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__cell {
+  white-space: nowrap;
+  background: none;
+
+  // button when inline-block inside table will
+  // add extra space top bottom
+  > button {
+    display: block;
+  }
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__expander {
+  vertical-align: middle;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__submenu-wrapper {
+  position: absolute;
+  z-index: 500;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__menu-separator {
+  cursor: auto;
+  height: 1px;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}:focus {
+  outline: none;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--absolute {
+  position: absolute;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__row--disabled {
+  pointer-events: none;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--no-display {
+  position: absolute;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--hidden {
+  visibility: hidden;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--rtl {
+  .#{$INOVUA_MENU_ROOT_CLASS}__table {
+    direction: rtl;
+  }
+}
+
+// subcomponents
+.#{$INOVUA_MENU_ROOT_CLASS}__scroll-container {
+  width: 100%;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__table {
+  direction: ltr;
+  width: 100%;
+  text-align: start;
+  border-spacing: 0;
+  // padding: 8px 6px;
+  border-collapse: separate;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__row {
+  cursor: pointer;
+  user-select: none;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__arrow-up {
+  top: 0;
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}__arrow-down {
+  bottom: 0;
+}
+
+// submenu animation
+
+.#{$INOVUA_MENU_ROOT_CLASS}--animation-enabled {
+  transform: scale(0, 0);
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--transition-start {
+  transform-origin: left top;
+  transition: transform 150ms ease;
+
+  &.#{$INOVUA_MENU_ROOT_CLASS}--position-down {
+    transform-origin: left bottom;
+  }
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row {
+    transform: scale(1, 0);
+    transition: transform 150ms ease;
+  }
+}
+
+.#{$INOVUA_MENU_ROOT_CLASS}--transition-end {
+  transform: scale(1, 1);
+
+  .#{$INOVUA_MENU_ROOT_CLASS}__row {
+    transform: scale(1, 1);
+  }
+}

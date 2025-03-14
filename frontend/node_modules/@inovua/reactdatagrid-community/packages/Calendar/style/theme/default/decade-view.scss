@@ -1,0 +1,85 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view--theme-#{$INOVUA_CALENDAR_THEME_NAME} {
+  padding: 2px 0;
+  min-height: 92px;
+  min-width: 238px;
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-row {
+    min-width: 190px;
+    min-height: 46px;
+    justify-content: center;
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-arrow {
+    cursor: pointer;
+    position: relative;
+    fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR;
+    user-select: none;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+    transition: background 300ms, fill 300ms;
+
+    &:hover {
+      fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR_HOVER;
+      background: $INOVUA_CALENDAR_NAV_BAR_ARROW_BACKGROUND_HOVER;
+    }
+
+    &--disabled {
+      fill: $INOVUA_CALENDAR_NAV_BAR_ARROW_COLOR_DISABLED;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-arrow--prev {
+    &:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-arrow--disabled) {
+      &:active {
+        right: 1px;
+      }
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-arrow--next {
+    &:not(.#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-arrow--disabled) {
+      &:active {
+        left: 1px;
+      }
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-year {
+    margin: 5px 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 24px;
+    max-height: 24px;
+    min-width: 44px;
+    max-width: 44px;
+    height: 24px;
+    border-radius: $INOVUA_CALENDAR_BORDER_RADIUS;
+
+    &:hover {
+      background: $INOVUA_CALENDAR_DAY_COLOR_HOVER;
+      color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+    }
+
+    &--disabled {
+      color: $INOVUA_CALENDAR_DAY_COLOR_DISABLED;
+    }
+  }
+
+  .#{$INOVUA_CALENDAR_ROOT_CLASS}__decade-view-year--value {
+    color: $INVOUA_DATE_INPUT_ACTIVE_COLOR;
+    background: $INOVUA_CALENDAR_DAY_COLOR_ACTIVE padding-box;
+  }
+}

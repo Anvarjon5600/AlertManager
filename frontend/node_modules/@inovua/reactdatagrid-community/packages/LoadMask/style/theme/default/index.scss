@@ -1,0 +1,69 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables.scss';
+
+.inovua-react-toolkit-load-mask.inovua-react-toolkit-load-mask--theme-#{$INOVUA_LOAD_MASK_THEME_NAME} {
+  fill: transparent;
+
+  .inovua-react-toolkit-load-mask__background-layer {
+    background: $INOVUA_LOAD_MASK_BG;
+  }
+
+  .inovua-react-toolkit-load-mask__loader--svg {
+    position: relative;
+    animation: inovua-react-toolkit-loadmask-spin 1.5s linear infinite;
+
+    .inovua-react-toolkit-load-mask__loader-spinner {
+      border-radius: 50%;
+      background-image: conic-gradient(
+        from 0.25turn,
+        #e3e3e3,
+        $INOVUA_LOAD_MASK_MAIN_COLOR 0.99turn,
+        #e3e3e3
+      );
+
+      object-fit: contain;
+      z-index: 9000;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      z-index: 10000;
+      background: $INOVUA_LOAD_MASK_INNER_LAYER;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: $INOVUA_LOAD_MASK_INNER_BG;
+      z-index: 10000;
+    }
+  }
+
+  @keyframes inovua-react-toolkit-loadmask-spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .inovua-react-toolkit-load-mask__loader-loadbar {
+    border-radius: 50px;
+    box-shadow: 0 0 3px $INOVUA_LOAD_MASK_SECONDARY_COLOR;
+  }
+}

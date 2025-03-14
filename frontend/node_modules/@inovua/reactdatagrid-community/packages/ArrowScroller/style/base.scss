@@ -1,0 +1,148 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@import './variables';
+@import '../../Flex/style/index.scss';
+@import '../../react-scroll-container-pro/style/base.scss';
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS},
+.inovua-react-toolkit-arrow-scroller {
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  align-items: start;
+  direction: ltr;
+}
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}--rtl,
+.inovua-react-toolkit-arrow-scroller--rtl {
+  direction: rtl;
+
+  .#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__scroll-container
+    > .inovua-react-scroll-container__wrapper {
+    max-width: 100%;
+  }
+  .inovua-react-toolkit-arrow-scroller__scroll-container
+    > .inovua-react-scroll-container__wrapper {
+    max-width: 100%;
+  }
+}
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}--native-scroll,
+.inovua-react-toolkit-arrow-scroller--native-scroll {
+  transform: translate3d(
+    0,
+    0,
+    0px
+  ); // needed since the arrows are fixed and need to have a transformed parent
+  // in order to be positioned correctly
+}
+
+.inovua-react-toolkit-arrow-scroller__inner-wrapper,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__inner-wrapper {
+  display: flex;
+  flex: 1 0 auto;
+  align-items: stretch;
+  position: relative;
+  transition: top 350ms ease-out;
+
+  &--direction-column {
+    flex-direction: column;
+  }
+}
+
+.inovua-react-toolkit-arrow-scroller--direction-horizontal,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}--direction-horizontal {
+  display: flex;
+}
+
+.inovua-react-toolkit-arrow-scroller--direction-vertical,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}--direction-vertical {
+  max-height: 100%;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow {
+  &--visible {
+    display: flex;
+    align-items: center;
+  }
+
+  &--native-scroll {
+    position: fixed;
+  }
+
+  &--direction-up,
+  &--direction-down {
+    width: 100%;
+    flex-flow: column;
+  }
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--auto,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--auto {
+  position: absolute;
+  text-align: center;
+
+  &.inovua-react-toolkit-arrow-scroller__arrow--native-scroll,
+  &.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--native-scroll {
+    position: fixed;
+  }
+}
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-left,
+.inovua-react-toolkit-arrow-scroller__arrow--direction-left,
+.inovua-react-toolkit-arrow-scroller__arrow--direction-right,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-right {
+  top: 0;
+  bottom: 0;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow {
+  cursor: pointer;
+}
+
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-up,
+.inovua-react-toolkit-arrow-scroller__arrow--direction-up,
+.inovua-react-toolkit-arrow-scroller__arrow--direction-down,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-down {
+  left: 0;
+  right: 0;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--direction-left,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-left {
+  left: 0;
+  z-index: 200;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--direction-right,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-right {
+  right: 0;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--direction-up,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-up {
+  top: 0;
+  z-index: 200;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--direction-down,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--direction-down {
+  bottom: 0;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--disabled,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--disabled {
+  opacity: 0.5;
+}
+
+.inovua-react-toolkit-arrow-scroller__arrow--hidden,
+.#{$INOVUA_ARROW_SCROLLER_ROOT_CLASS}__arrow--hidden {
+  display: none;
+}

@@ -1,0 +1,77 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+.InovuaReactDataGrid__column-header {
+  position: relative;
+}
+
+.InovuaReactDataGrid__column-header__menu-tool {
+  height: 100%;
+  flex: none;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  top: 0;
+
+  .InovuaReactDataGrid__sort-icon--desc,
+  .InovuaReactDataGrid__sort-icon--asc {
+    margin-top: 2px;
+  }
+
+  &--show-on-hover {
+    position: absolute;
+  }
+
+  &--show-on-hover:not(.InovuaReactDataGrid__column-header__menu-tool--visible) {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.InovuaReactDataGrid__column-header--align-start.InovuaReactDataGrid__column-header--direction-ltr {
+  & > .InovuaReactDataGrid__column-header__menu-tool--show-on-hover {
+    right: 0;
+  }
+}
+
+.InovuaReactDataGrid__column-header--align-start.InovuaReactDataGrid__column-header--direction-rtl {
+  & > .InovuaReactDataGrid__column-header__menu-tool--show-on-hover {
+    left: 0;
+  }
+}
+
+.InovuaReactDataGrid__column-header--align-center {
+  position: relative;
+
+  & > .InovuaReactDataGrid__column-header__menu-tool--show-on-hover {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.InovuaReactDataGrid__column-header--align-end.InovuaReactDataGrid__column-header--direction-ltr {
+  .InovuaReactDataGrid__column-header__menu-tool--show-on-hover {
+    right: initial;
+    left: 0;
+  }
+}
+
+.InovuaReactDataGrid__column-header--align-end.InovuaReactDataGrid__column-header--direction-rtl {
+  .InovuaReactDataGrid__column-header__menu-tool--show-on-hover {
+    left: initial;
+    right: 0;
+  }
+}
+
+.InovuaReactDataGrid__column-header:hover
+  > .InovuaReactDataGrid__column-header__menu-tool {
+  opacity: 1;
+  pointer-events: all;
+}

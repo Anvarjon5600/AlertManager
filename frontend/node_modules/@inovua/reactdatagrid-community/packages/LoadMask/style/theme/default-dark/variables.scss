@@ -1,0 +1,18 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_LOAD_MASK_THEME_NAME: 'default-dark' !default;
+
+$INOVUA_LOAD_MASK_MAIN_COLOR: #7986cb !default;
+
+$INOVUA_LOAD_MASK_BG: rgba(0, 0, 0, 0.4) !default;
+$INOVUA_LOAD_MASK_SECONDARY_COLOR: rgba(
+  $INOVUA_LOAD_MASK_MAIN_COLOR,
+  0.2
+) !default;
+$INOVUA_LOAD_MASK_INNER_BG: #313943 !default;
+$INOVUA_LOAD_MASK_INNER_LAYER: transparent !default;

@@ -1,0 +1,14 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA_MENU_THEME_NAME: 'pink-dark' !default;
+$INOVUA_MENU_PRIMARY_COLOR: #dc927b !default;
+
+@import '../../../../RadioButtonGroup/style/theme/pink-dark/index.scss';
+@import '../../../../ArrowScroller/style/theme/pink-dark/index.scss';
+
+@import '../default-dark/index.scss';

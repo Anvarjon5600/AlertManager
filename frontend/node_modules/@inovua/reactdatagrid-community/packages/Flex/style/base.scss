@@ -1,0 +1,210 @@
+/**
+ * Copyright © INOVUA TRADING.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+$INOVUA-REACT-FLEX_MAX-SIZE: 100 !default;
+
+$INOVUA-REACT-FLEX-PREFIX: 'inovua-react-toolkit-flex-v3';
+
+.#{$INOVUA-REACT-FLEX-PREFIX} {
+  display: flex;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--inline {
+  display: inline-flex;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--display-flex {
+  display: flex;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--display-inline-flex {
+  display: inline-flex;
+}
+
+/* ALIGN-ITEMS */
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-center {
+  align-items: center;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-stretch {
+  align-items: stretch;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-baseline {
+  align-items: baseline;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-end,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-flex-end {
+  align-items: flex-end;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-start,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-items-flex-start {
+  align-items: flex-start;
+}
+
+/* ALIGN-SELF */
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-center {
+  align-self: center;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-stretch {
+  align-self: stretch;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-baseline {
+  align-self: baseline;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-auto {
+  align-self: auto;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-end,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-flex-end {
+  align-self: flex-end;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-start,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-self-flex-start {
+  align-self: flex-start;
+}
+
+/* ALIGN-CONTENT */
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-center {
+  align-content: center;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-stretch {
+  align-content: stretch;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-around,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-space-around {
+  align-content: space-around;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-between,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-space-between {
+  align-content: space-between;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-end,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-flex-end {
+  align-content: flex-end;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-start,
+.#{$INOVUA-REACT-FLEX-PREFIX}--align-content-flex-start {
+  align-content: flex-start;
+}
+
+/* JUSTIFY-CONTENT */
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-start,
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-flex-start {
+  justify-content: flex-start;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-end,
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-flex-end {
+  justify-content: flex-end;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-center {
+  justify-content: center;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-space-around {
+  justify-content: space-around;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--justify-content-space-between {
+  justify-content: space-between;
+}
+
+/* WRAP */
+.#{$INOVUA-REACT-FLEX-PREFIX}--wrap {
+  flex-wrap: wrap;
+}
+
+/* COLUMN */
+.#{$INOVUA-REACT-FLEX-PREFIX}--column {
+  flex-direction: column;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--column-reverse {
+  flex-direction: column-reverse;
+}
+
+/* ROW */
+.#{$INOVUA-REACT-FLEX-PREFIX}--row {
+  flex-direction: row;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--row-reverse {
+  flex-direction: row-reverse;
+}
+
+/* FLEX-BASIS */
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-auto {
+  flex-basis: auto;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-none,
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-0 {
+  flex-basis: 0;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-fill {
+  flex-basis: fill;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-content {
+  flex-basis: content;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-fit-content {
+  flex-basis: fit-content;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-min-content {
+  flex-basis: min-content;
+}
+
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-basis-max-content {
+  flex-basis: max-content;
+}
+
+/* FLEX */
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-none,
+.#{$INOVUA-REACT-FLEX-PREFIX}--flex-0 {
+  flex: none;
+}
+
+/* stylelint-disable */
+@for $i from 1 through $INOVUA-REACT-FLEX_MAX-SIZE {
+  .#{$INOVUA-REACT-FLEX-PREFIX}--flex-#{$i} {
+    flex: $i;
+  }
+}
+
+/* FLEX-GROW */
+@for $i from 0 through $INOVUA-REACT-FLEX_MAX-SIZE {
+  .#{$INOVUA-REACT-FLEX-PREFIX}--flex-grow-#{$i} {
+    flex-grow: $i;
+  }
+}
+
+/* FLEX-SHRINK */
+@for $i from 0 through $INOVUA-REACT-FLEX_MAX-SIZE {
+  .#{$INOVUA-REACT-FLEX-PREFIX}--flex-shrink-#{$i} {
+    flex-shrink: $i;
+  }
+}
+
+/* stylelint-enable */
