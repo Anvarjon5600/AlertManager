@@ -4,7 +4,6 @@ import os
 import requests
 import openpyxl
 import google.generativeai as genai
-import smtplib
 import time
 import json
 from email.mime.text import MIMEText
@@ -178,8 +177,11 @@ def get_xclarity_alerts(host, username, password):
         url = f"https://{host}/events/activeAlerts"
         response = requests.get(url, auth=(username, password), verify=False)
         response.raise_for_status()
+        print(response.json())
+        print("request")
         return response.json()
     except requests.exceptions.RequestException as e:
+        print(f"error:{str(e)}")
         return {'error': str(e)}
 
 # Функция для получения рекомендации Gemini
@@ -222,4 +224,4 @@ def xclarity_gemini():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000) # Запускаем Flask на порту 5000
+    app.run(host="0.0.0.0",debug=True, port=5000) # Запускаем Flask на порту 5000

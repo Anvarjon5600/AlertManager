@@ -28,7 +28,7 @@ export const fetchNutanixAlerts = createAsyncThunk(
   'nutanix/fetchAlerts',
   async (params: FetchAlertsParams, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/alerts', params);
+      const response = await axios.post('http://192.168.40.42:5000/api/alerts', params);
       return response.data;
     } catch (error: any) {
       return rejectWithValue(error.response.data);
@@ -43,7 +43,7 @@ export const fetchGeminiRecommendation = createAsyncThunk(
     const state: any = getState();
     const config = state.nutanix.config;
     try {
-      const response = await axios.post('http://localhost:5000/api/nutanix/gemini', {
+      const response = await axios.post('http://192.168.40.42:5000/api/nutanix/gemini', {
         ...config,
         alert: alert,
       });

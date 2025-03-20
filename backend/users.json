@@ -10,5 +10,11 @@
     "name": "Anvarjon",
     "email": "anvarjon.ganiyev@hyperthink.uz",
     "password": "password123!"
+  },
+  {
+    "id": 3,
+    "name": "Igor",
+    "email": "igor.panteleev@hyperthink.uz",
+    "password": "password123!"
   }
 ]

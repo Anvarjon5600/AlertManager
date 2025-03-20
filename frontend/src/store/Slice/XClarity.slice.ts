@@ -17,9 +17,10 @@ export const fetchXClarityAlerts = createAsyncThunk(
   'xclarity/fetchAlerts',
   async (config: XClarityConfig, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/xclarity/alerts', config);
+      const response = await axios.post('http://192.168.40.42:5000/api/xclarity/alerts', config);
       const alerts: XClarityAlert[] = response.data;
-
+      
+      console.log("😊response",response)
       // Форматирование даты для каждого алерта
       const formattedAlerts = alerts.map((alert) => {
         const date = new Date(alert.eventDate);
@@ -54,7 +55,7 @@ export const fetchGeminiRecommendations = createAsyncThunk(
     const state: any = getState();
     const config = state.xclarity.config;
     try {
-      const response = await axios.post('http://localhost:5000/api/xclarity/gemini', {
+      const response = await axios.post('http://192168.40.42:5000/api/xclarity/gemini', {
         data: { ...config, alert }, // Отправляем данные в правильном формате
       });
       return response.data.recommendation;

@@ -83,7 +83,7 @@ const UsersContent: React.FC = () => {
   );
 
   return (
-    <Box sx={{ p: 2, bgcolor: "background.paper", minWidth: "100%" }}>
+    <Box sx={{ p: 2, bgcolor: "background.paper", minWidth: "100%",height:"100%" }}>
       <Button variant="contained" onClick={() => handleOpen()}>
         Добавить пользователя
       </Button>
