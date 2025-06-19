@@ -1,15 +1,15 @@
+@import url('/public/fonts/stylesheet.css');
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Rounded Mplus 1c', sans-serif !important;
 }
 
 .app-background {
   width: 100vw;
   height: 100vh;
-  background-image: url(./assets/images/homeBg.png);
-  background-repeat: no-repeat;
-  background-size: 85%;
 }
 
 .btn {

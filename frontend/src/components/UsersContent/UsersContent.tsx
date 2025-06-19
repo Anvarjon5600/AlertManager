@@ -67,7 +67,6 @@ const UsersContent: React.FC = () => {
     const user: UsersType = {
       id: currentUser?.id || Date.now(),
       ...formData,
-      image: "",
     };
 
     currentUser ? dispatch(editUser(user)) : dispatch(addUser(user));
@@ -107,7 +106,7 @@ const UsersContent: React.FC = () => {
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
                 <TableCell>{user.password}</TableCell>
-                <TableCell>
+                <TableCell sx={{ display: "flex", gap: 1 }}>
                   <Button variant="outlined" onClick={() => handleOpen(user)}>
                     Редактировать
                   </Button>

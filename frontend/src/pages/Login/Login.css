@@ -1,19 +1,24 @@
 .login-page {
    border-radius: 40px;
-   /* min-height: 320px; */
-   background-color: #fff;
-   box-shadow: 0 0 100px #000;
    padding: 40px;
-   width: 400px;
    display: flex;
    align-items: center;
    flex-direction: column;
-   gap: 25px;
-   font-family: sans-serif;
+   gap: 30px;
+   font-family: 'Rounded Mplus 1c', sans-serif !important;
    position: absolute;
-   top: 25%;
+   top: 32%;
    left: 50%;
    transform: translate(-50%);
+}
+
+.login-page__title {
+   font-family: 'Rounded Mplus 1c', sans-serif !important;
+   text-transform: uppercase;
+   letter-spacing: 10px;
+   font-size: 40px;
+   font-weight: 300;
+   color: #fff;
 }
 
 .login-forma {
@@ -21,30 +26,6 @@
    align-items: center;
    flex-direction: column;
    gap: 25px;
-}
-
-.login-forma input {
-   border-radius: 20px;
-   border: none;
-   outline: none;
-   width: 300px;
-   padding: 10px;
-   padding: 15px 25px;
-   background: inherit;
-   border: 1px solid rgb(107, 32, 49);
-}
-
-.login-forma button {
-   cursor: pointer;
-   border: none;
-   outline: none;
-   border-radius: 20px;
-   border: 1px solid rgb(107, 32, 49);
-   width: 300px;
-   padding: 15px 25px;
-   background: #6200EE;
-   font-size: 16px;
-   color: #fff;
 }
 
 .login-text {

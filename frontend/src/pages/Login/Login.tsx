@@ -4,12 +4,81 @@ import { ChangeEventHandler, useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetchUsers } from '../../store/Slice/Users.slice'
 import { RootState, AppDispatch } from '../../store/store'
+import { NutanixStyleParticles } from '../../components/NutanixStyleParticles/NutanixStyleParticles '
+import { Button, styled, TextField } from '@mui/material'
+
+
+//! Стили для input 
+const CssTextField = styled(TextField)({
+  '& label': {
+    color: '#fff',
+    fontFamily: '"Rounded Mplus 1c", sans-serif',
+    fontSize: '18px',
+    fontWeight: 300,
+    fontStyle: 'normal',
+    letterSpacing: '2px',
+    lineHeight: '24px',
+  },
+  '& label.Mui-focused': {
+    color: '#fff',
+    fontFamily: '"Rounded Mplus 1c", sans-serif',
+    fontSize: '18px',
+    fontWeight: 300,
+    fontStyle: 'normal',
+    letterSpacing: '2px',
+    lineHeight: '24px',
+  },
+  '& .MuiInputBase-input': {
+    color: '#fff',
+    fontFamily: '"Rounded Mplus 1c", sans-serif',
+    fontSize: '18px',
+    fontWeight: 300,
+    fontStyle: 'normal',
+    letterSpacing: '2px',
+    lineHeight: '24px',
+  },
+  '& .MuiInput-underline:after': {
+    borderBottomColor: '#B2BAC2',
+  },
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#E0E3E7',
+    },
+    '&:hover fieldset': {
+      borderColor: '#B2BAC2',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#6F7E8C',
+    },
+    '&.Mui-focused .MuiInputBase-input': {
+      color: '#fff' // Цвет текста при фокусе
+    }
+  },
+});
+
+//! Стили для кнопки
+const SignInButton = styled(Button)({
+  fontFamily: '"Rounded Mplus 1c", sans-serif',
+  fontWeight: '400',
+  fontSize: '16px',
+  textTransform: 'none',
+  marginTop: '24px',
+  fontStyle: 'normal',
+  letterSpacing: '2px',
+  lineHeight: '24px',
+  color: '#fff',
+  backgroundColor: 'inherit',
+  borderColor: '#fff',
+  width: '200px',
+  padding: '10px 20px',
+});
+
 
 function Login() {
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { users } = useSelector((state: RootState) => state.user);
-  const [loggedUser, setLoggedUser] = useState({ email: '', password: '' });
+  const [loggedUser, setLoggedUser] = useState({ name: '', password: '' });
 
   useEffect(() => {
     dispatch(fetchUsers()); // Загружаем пользователей при монтировании
@@ -22,7 +91,7 @@ function Login() {
   const handleSubmit: ChangeEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    const user = users.find((u) => u.email === loggedUser.email && u.password === loggedUser.password);
+    const user = users.find((u) => u.name === loggedUser.name && u.password === loggedUser.password);
 
     if (!user) {
       alert("Ошибка пароля или электронной почты. Повторите попытку.");
@@ -36,13 +105,16 @@ function Login() {
   };
 
   return (
-    <div className="login-page">
-      <h1>Sign in</h1>
-      <form onSubmit={handleSubmit} className="login-forma">
-        <input onChange={handleChange} name="email" type="text" placeholder="User email" />
-        <input onChange={handleChange} name="password" type="password" placeholder="User password" />
-        <button type="submit">Sign in</button>
-      </form>
+    <div>
+      <NutanixStyleParticles />
+      <div className="login-page">
+        <h1 className='login-page__title'>ALERTS</h1>
+        <form onSubmit={handleSubmit} className="login-forma" autoComplete="off">
+          <CssTextField style={{ width: '400px' }} onChange={handleChange} name="name" label="username" variant="outlined" />
+          <CssTextField style={{ width: '400px' }} onChange={handleChange} name="password" label="password" variant="outlined" />
+          <SignInButton variant="outlined" type="submit">Sign in</SignInButton>
+        </form>
+      </div>
     </div>
   );
 }

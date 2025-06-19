@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "admin",
+    "email": "admin@hyperthink.uz",
+    "password": "123"
+  },
+  {
+    "id": 2,
+    "name": "anvarjon",
+    "email": "anvarjon.ganiyev@hyperthink.uz",
+    "password": "123!"
+  },
+  {
+    "id": 3,
+    "name": "ganiyev",
+    "email": "ganiyev@hyperthink.uz",
+    "password": "123"
+  }
+]

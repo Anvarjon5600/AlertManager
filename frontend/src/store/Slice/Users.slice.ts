@@ -14,24 +14,36 @@ const initialState: UserState = {
 };
 
 export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch('http://192.168.40.42:5000/api/users');
+  const response = await fetch('http://localhost:5000/api/users');
   const data = await response.json();
   return data;
 });
 
-export const addUser = createAsyncThunk('users/addUser', async (user: UsersType) => {
-  const response = await fetch('http://192.168.40.42:5000/api/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  });
-  return await response.json();
-});
+export const addUser = createAsyncThunk(
+  'users/addUser',
+  async (userData: Omit<UsersType, 'id'>, { rejectWithValue }) => {
+    try {
+      const response = await fetch('http://localhost:5000/api/users/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
 
+      if (!response.ok) {
+        const error = await response.json();
+        return rejectWithValue(error.error || 'Server error');
+      }
+
+      return await response.json();
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 export const editUser = createAsyncThunk('users/editUser', async (user: UsersType) => {
-  const response = await fetch(`http://192.168.40.42:5000/api/users/${user.id}`, {
+  const response = await fetch(`http://localhost:5000/api/users/${user.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +54,7 @@ export const editUser = createAsyncThunk('users/editUser', async (user: UsersTyp
 });
 
 export const deleteUser = createAsyncThunk('users/deleteUser', async (id: number) => {
-  await fetch(`http://192.168.40.42:5000/api/users/${id}`, {
+  await fetch(`http://localhost:5000/api/users/${id}`, {
     method: 'DELETE',
   });
   return id;

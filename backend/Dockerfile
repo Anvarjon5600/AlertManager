@@ -13,4 +13,4 @@ COPY . .
 
 ENV PATH=/root/.local/bin:$PATH
 EXPOSE 5000
-CMD ["python", "nutanix.py"]
+CMD ["python", "run.py"]

@@ -4,12 +4,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchUsers } from "../../store/Slice/Users.slice";
 import { RootState, AppDispatch } from "../../store/store";
 
+import './Home.css'
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { createTheme } from "@mui/material/styles";
 import Stack from "@mui/material/Stack";
 import NutanixContent from "../../components/NutanixContent/NutanixContent";
 import XClarityContent from "../../components/XClarityContent/XClarityContent";
+import VmwareContent from "../../components/VmwareContent/VmwareContent";
 import UsersContent from "../../components/UsersContent/UsersContent";
 
 import {
@@ -23,6 +25,7 @@ import { useDemoRouter } from "@toolpad/core/internal";
 import Logo from "/public/icon.svg";
 import Nutanix from "../../assets/icons/nutanix.ico";
 import XClarity from "../../assets/icons/xclarity.ico";
+import Vmware from "../../assets/icons/clipart925106.png";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 const NAVIGATION: Navigation = [
@@ -36,6 +39,11 @@ const NAVIGATION: Navigation = [
     segment: "xclarity",
     title: "XClarity",
     icon: <img src={XClarity} alt="XClarity Icon" style={{ width: 25, height: 24 }} />,
+  },
+  {
+    segment: "vmware",
+    title: "VMware",
+    icon: <img src={Vmware} alt="Vmware Icon" style={{ width: 25, height: 24 }} />,
   },
   { kind: "divider" },
   { segment: "users", title: "Users", icon: <ManageAccountsIcon /> },
@@ -55,6 +63,8 @@ function DemoPageContent({ pathname }: { pathname: string }) {
       return <XClarityContent />;
     case "/users":
       return <UsersContent />;
+    case "/vmware":
+      return <VmwareContent />;
     default:
       return (
         <Box
@@ -118,7 +128,7 @@ export default function DashboardLayoutAccount({ window }: { window?: () => Wind
         user: {
           name: currentUser.name,
           email: currentUser.email,
-          image: currentUser.image ?? "",
+          image:  "",
         },
       });
     } else {
