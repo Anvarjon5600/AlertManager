@@ -8,7 +8,12 @@ function ProtectedRoute() {
    let loggedIn = false
    if (localStorageItem) {
       if (localStorageItem === 'true') loggedIn = true
-      if (localStorageItem === 'false') loggedIn = false
+      if (localStorageItem === 'false') {
+         loggedIn = false
+         localStorage.removeItem('access_token');
+         localStorage.removeItem('refresh_token');
+         localStorage.removeItem('userId');
+      }
    }
 
    if (loggedIn && userId) {

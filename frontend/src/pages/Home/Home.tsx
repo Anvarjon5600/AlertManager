@@ -89,7 +89,7 @@ function CustomAppTitle() {
     <Stack direction="row" alignItems="center" spacing={2}>
       <img src={Logo} alt="Logo" />
       <Typography variant="h5" fontWeight="550" color="hsl(210, 100%, 60%)">
-        Cross Platform Alerts
+        Alerts
       </Typography>
     </Stack>
   );
@@ -128,7 +128,7 @@ export default function DashboardLayoutAccount({ window }: { window?: () => Wind
         user: {
           name: currentUser.name,
           email: currentUser.email,
-          image:  "",
+          image: "",
         },
       });
     } else {
@@ -144,6 +144,8 @@ export default function DashboardLayoutAccount({ window }: { window?: () => Wind
         setSession(null);
         localStorage.removeItem("userId");
         localStorage.setItem("loggedIn", "false");
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         navigate("/login");
       },
     }),

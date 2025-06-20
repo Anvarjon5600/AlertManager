@@ -1,95 +1,197 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { UsersType } from '../types/type';
+import api from '../../api/api';
 
 interface UserState {
   users: UsersType[];
+  currentUser: UsersType | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: UserState = {
   users: [],
+  currentUser: null,
   loading: false,
   error: null,
 };
 
-export const fetchUsers = createAsyncThunk('users/fetchUsers', async () => {
-  const response = await fetch('http://localhost:5000/api/users');
-  const data = await response.json();
-  return data;
-});
-
-export const addUser = createAsyncThunk(
-  'users/addUser',
+// Регистрация
+export const registerUser = createAsyncThunk(
+  'users/register',
   async (userData: Omit<UsersType, 'id'>, { rejectWithValue }) => {
     try {
-      const response = await fetch('http://localhost:5000/api/users/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData),
-      });
-
-      if (!response.ok) {
-        const error = await response.json();
-        return rejectWithValue(error.error || 'Server error');
-      }
-
-      return await response.json();
+      const { data } = await api.post('/users/register', userData);
+      return data;
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response?.data?.error || 'Registration failed');
     }
   }
 );
-export const editUser = createAsyncThunk('users/editUser', async (user: UsersType) => {
-  const response = await fetch(`http://localhost:5000/api/users/${user.id}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(user),
-  });
-  return await response.json();
-});
 
-export const deleteUser = createAsyncThunk('users/deleteUser', async (id: number) => {
-  await fetch(`http://localhost:5000/api/users/${id}`, {
-    method: 'DELETE',
-  });
-  return id;
-});
+// Логин
+export const loginUser = createAsyncThunk(
+  'users/login',
+  async (credentials: { name: string; password: string }, { rejectWithValue }) => {
+    try {
+      const { data } = await api.post('/users/login', credentials);
+      localStorage.setItem('access_token', data.access_token);
+      localStorage.setItem('refresh_token', data.refresh_token);
+      return data.user;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Login failed');
+    }
+  }
+);
+
+// Текущий пользователь
+export const getCurrentUser = createAsyncThunk(
+  'users/me',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get('/users/me');
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Auth error');
+    }
+  }
+);
+
+// Все пользователи
+export const fetchUsers = createAsyncThunk(
+  'users/fetchUsers',
+  async (_, { rejectWithValue }) => {
+    try {
+      const { data } = await api.get('/users/all');
+      return data as UsersType[];
+    } catch (e: any) {
+      return rejectWithValue(e.response?.data?.error || 'Ошибка получения');
+    }
+  }
+);
+
+// Обновление текущего пользователя
+export const updateCurrentUser = createAsyncThunk(
+  'users/updateCurrentUser',
+  async (updateData: Partial<Omit<UsersType, 'id'>>, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put('/users/me', updateData);
+      return data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Ошибка обновления профиля');
+    }
+  }
+);
+
+// Обновление любого пользователя
+export const updateUser = createAsyncThunk(
+  'users/updateUser',
+  async ({userId, updateData}: {userId: number, updateData: Partial<UsersType>}, { rejectWithValue }) => {
+    try {
+      const { data } = await api.put(`/users/${userId}`, updateData);
+      return {userId, data};
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Ошибка обновления пользователя');
+    }
+  }
+);
+
+// Удаление текущего пользователя
+export const deleteCurrentUser = createAsyncThunk(
+  'users/deleteCurrentUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      await api.delete('/users/me');
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      return true;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Ошибка удаления');
+    }
+  }
+);
+
+// Удаление любого пользователя
+export const deleteUser = createAsyncThunk(
+  'users/deleteUser',
+  async (userId: number, { rejectWithValue }) => {
+    try {
+      await api.delete(`/users/${userId}`);
+      return userId;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.error || 'Ошибка удаления');
+    }
+  }
+);
 
 const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    logoutUser(state) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('refresh_token');
+      state.currentUser = null;
+      state.error = null;
+    },
+    clearError(state) {
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUsers.pending, (state) => {
+      .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.loading = false;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(loginUser.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.currentUser = action.payload;
+      })
+      .addCase(loginUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(getCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
+      })
+      .addCase(fetchUsers.fulfilled, (state, action) => {
         state.users = action.payload;
       })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Ошибка загрузки пользователей.';
+      .addCase(updateCurrentUser.fulfilled, (state, action) => {
+        state.currentUser = action.payload;
       })
-      .addCase(addUser.fulfilled, (state, action) => {
-        state.users.push(action.payload);
-      })
-      .addCase(editUser.fulfilled, (state, action) => {
-        state.users = state.users.map((user) =>
-          user.id === action.payload.id ? action.payload : user
+      .addCase(updateUser.fulfilled, (state, action) => {
+        const { userId, data } = action.payload;
+        state.users = state.users.map(user => 
+          user.id === userId ? {...user, ...data} : user
         );
+        if (state.currentUser?.id === userId) {
+          state.currentUser = data;
+        }
       })
-      .addCase(deleteUser.fulfilled, (state, action: PayloadAction<number>) => {
-          state.users = state.users.filter((user) => user.id !== action.payload);
-});
+      .addCase(deleteCurrentUser.fulfilled, (state) => {
+        state.currentUser = null;
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        state.users = state.users.filter(user => user.id !== action.payload);
+        if (state.currentUser?.id === action.payload) {
+          state.currentUser = null;
+        }
+      });
   },
 });
 
+export const { logoutUser, clearError } = usersSlice.actions;
 export default usersSlice.reducer;

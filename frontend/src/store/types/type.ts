@@ -1,8 +1,10 @@
-export type UsersType = {
-  name: string,
-	email: string,
-	id: number,
-  password: string,
+export interface UsersType {
+  id: number;
+  name: string;
+  email: string;
+  password?: string;
+  role: string;
+  createdAt?: string; // Делаем необязательным, так как при создании его еще нет
 }
 
 

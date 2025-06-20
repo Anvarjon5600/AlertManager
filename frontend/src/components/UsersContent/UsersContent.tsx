@@ -1,121 +1,158 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Button,
-  TextField,
-  Modal,
-  Box,
-  Typography,
+  Table, TableBody, TableCell,
+  TableContainer, TableHead,
+  TableRow, Paper, Button,
+  TextField, Modal, Box,
+  Typography, Select, MenuItem, InputLabel, FormControl, SelectChangeEvent
 } from "@mui/material";
-import { fetchUsers, addUser, editUser, deleteUser } from "../../store/Slice/Users.slice";
+import {
+  fetchUsers,
+  updateCurrentUser,
+  deleteCurrentUser,
+  deleteUser,
+  registerUser,
+  updateUser,
+} from "../../store/Slice/Users.slice";
 import { RootState, AppDispatch } from "../../store/store";
 import { UsersType } from "../../store/types/type";
+import dayjs from "dayjs";
 
 const UsersContent: React.FC = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { users, loading, error } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch<AppDispatch>();
+  const { currentUser } = useSelector((state: RootState) => state.user);
+  const { users } = useSelector((state: RootState) => state.user);
 
-  // Состояния формы
   const [open, setOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<UsersType | null>(null);
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [isNewUser, setIsNewUser] = useState(false);
+  const [formData, setFormData] = useState<Omit<UsersType, 'id'>>({
+    name: "",
+    email: "",
+    password: "",
+    role: "user",
+    createdAt: undefined
+  });
+  const [editingUser, setEditingUser] = useState<UsersType | null>(null);
 
-  // Запрос пользователей только если они еще не загружены
   useEffect(() => {
-    if (users.length === 0) {
-      dispatch(fetchUsers());
-    }
-  }, [dispatch, users.length]);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
-  // Открытие модального окна
-  const handleOpen = useCallback((user?: UsersType) => {
-    setCurrentUser(user || null);
+  const openModal = useCallback((user?: UsersType) => {
+    setIsNewUser(!user);
+    setEditingUser(user || null); // Сохраняем редактируемого пользователя
     setFormData({
       name: user?.name || "",
       email: user?.email || "",
-      password: user?.password || "",
+      password: "",
+      role: user?.role || "user",
+      createdAt: user?.createdAt
     });
     setOpen(true);
   }, []);
 
-  // Закрытие модального окна
-  const handleClose = useCallback(() => {
-    setOpen(false);
-    setCurrentUser(null);
-    setFormData({ name: "", email: "", password: "" });
-  }, []);
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  // Изменение данных формы
-  const handleChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    },
-    []
-  );
+  const handleSelectChange = (e: SelectChangeEvent<string>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name as string]: value }));
+  };
 
-  // Сохранение пользователя
-  const handleSave = useCallback(() => {
-    if (!formData.name || !formData.email || !formData.password) return;
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email) {
+      alert("Name and email are required");
+      return;
+    }
 
-    const user: UsersType = {
-      id: currentUser?.id || Date.now(),
-      ...formData,
-    };
+    try {
+      if (isNewUser) {
+        await dispatch(registerUser(formData));
+      } else {
+        if (currentUser?.role === 'admin' && editingUser) {
+          await dispatch(updateUser({
+            userId: editingUser.id,
+            updateData: formData
+          }));
+        } else {
+          await dispatch(updateCurrentUser(formData));
+        }
+      }
+      setOpen(false);
+      dispatch(fetchUsers());
+    } catch (err) {
+      console.error("Error saving user:", err);
+    }
+  };
 
-    currentUser ? dispatch(editUser(user)) : dispatch(addUser(user));
-    handleClose();
-  }, [dispatch, currentUser, formData, handleClose]);
+  const handleDelete = async (userId: number) => {
+    if (!confirm('Вы уверены, что хотите удалить этого пользователя?')) return;
 
-  // Удаление пользователя
-  const handleDelete = useCallback(
-    (id: number) => {
-      dispatch(deleteUser(id));
-    },
-    [dispatch]
-  );
+    try {
+      // Если удаляем текущего пользователя - используем deleteCurrentUser
+      if (currentUser?.id === userId) {
+        await dispatch(deleteCurrentUser());
+        // Перенаправление на страницу входа после удаления
+        window.location.href = '/login';
+      } else {
+        // Для других пользователей используем deleteUser
+        await dispatch(deleteUser(userId));
+      }
+      dispatch(fetchUsers());
+    } catch (err) {
+      console.error("Error deleting user:", err);
+    }
+  };
 
   return (
-    <Box sx={{ p: 2, bgcolor: "background.paper", minWidth: "100%",height:"100%" }}>
-      <Button variant="contained" onClick={() => handleOpen()}>
-        Добавить пользователя
+    <Box sx={{ p: 3 }}>
+      <Button
+        variant="contained"
+        onClick={() => openModal()}
+        sx={{ mb: 3 }}
+      >
+        Add New User
       </Button>
 
-      {loading && <Typography>Загрузка...</Typography>}
-      {error && <Typography color="error">{error}</Typography>}
-
-      <TableContainer component={Paper} sx={{ mt: 2 }}>
+      <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Имя</TableCell>
+              <TableCell>ID</TableCell>
+              <TableCell>Name</TableCell>
               <TableCell>Email</TableCell>
-              <TableCell>Пароль</TableCell>
-              <TableCell>Действия</TableCell>
+              <TableCell>Role</TableCell>
+              <TableCell>Created At</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {users.map((user) => (
+            {users.map(user => (
               <TableRow key={user.id}>
+                <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.password}</TableCell>
-                <TableCell sx={{ display: "flex", gap: 1 }}>
-                  <Button variant="outlined" onClick={() => handleOpen(user)}>
-                    Редактировать
+                <TableCell>{user.role}</TableCell>
+                <TableCell>
+                  {user.createdAt ? dayjs(user.createdAt).format('DD.MM.YYYY HH:mm') : 'N/A'}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="outlined"
+                    onClick={() => openModal(user)}
+                    sx={{ mr: 1 }}
+                  >
+                    Edit
                   </Button>
                   <Button
                     variant="outlined"
                     color="error"
                     onClick={() => handleDelete(user.id)}
                   >
-                    Удалить
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>
@@ -124,50 +161,71 @@ const UsersContent: React.FC = () => {
         </Table>
       </TableContainer>
 
-      <Modal open={open} onClose={handleClose}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            border: "2px solid #000",
-            boxShadow: 24,
-            p: 4,
-          }}
-        >
-          <Typography variant="h6">
-            {currentUser ? "Редактировать пользователя" : "Добавить пользователя"}
+      <Modal open={open} onClose={() => setOpen(false)}>
+        <Box sx={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 400,
+          bgcolor: 'background.paper',
+          boxShadow: 24,
+          p: 4,
+        }}>
+          <Typography variant="h6" gutterBottom>
+            {isNewUser ? 'Add New User' : 'Edit User'}
           </Typography>
+
           <TextField
-            label="Имя"
+            label="Name"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
             fullWidth
             margin="normal"
+            value={formData.name}
+            onChange={handleInputChange}
           />
+
           <TextField
             label="Email"
             name="email"
+            fullWidth
+            margin="normal"
             value={formData.email}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
+            onChange={handleInputChange}
           />
+
+          <FormControl fullWidth margin="normal">
+            <InputLabel>Role</InputLabel>
+            <Select
+              name="role"
+              value={formData.role}
+              label="Role"
+              onChange={handleSelectChange}
+              disabled={currentUser?.role !== 'admin'} // Только админ может выбирать роль
+            >
+              <MenuItem value="user">User</MenuItem>
+              <MenuItem value="admin">Admin</MenuItem>
+            </Select>
+          </FormControl>
+
           <TextField
-            label="Пароль"
-            type="password"
+            label="Password"
             name="password"
-            value={formData.password}
-            onChange={handleChange}
+            type="password"
             fullWidth
             margin="normal"
+            value={formData.password}
+            onChange={handleInputChange}
+            helperText={isNewUser ? 'Required for new users' : 'Leave empty to keep current'}
           />
-          <Button variant="contained" onClick={handleSave} sx={{ mt: 2 }}>
-            {currentUser ? "Сохранить" : "Добавить"}
+
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            sx={{ mt: 2 }}
+            fullWidth
+          >
+            {isNewUser ? 'Create User' : 'Save Changes'}
           </Button>
         </Box>
       </Modal>
