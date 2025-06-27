@@ -137,7 +137,6 @@ def me():
 @jwt_required()
 def get_all_users():
     users = UserService.get_all_users()
-    print(users)
     return (
         jsonify(
             [
@@ -146,6 +145,7 @@ def get_all_users():
                     "name": u["name"],
                     "email": u["email"],
                     "role": u["role"],
+                    "createdAt": u["createdAt"],
                 }
                 for u in users
             ]

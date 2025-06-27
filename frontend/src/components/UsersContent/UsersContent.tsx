@@ -18,6 +18,8 @@ import {
 import { RootState, AppDispatch } from "../../store/store";
 import { UsersType } from "../../store/types/type";
 import dayjs from "dayjs";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import PersonIcon from '@mui/icons-material/Person';
 
 const UsersContent: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -88,6 +90,7 @@ const UsersContent: React.FC = () => {
     }
   };
 
+     
   const handleDelete = async (userId: number) => {
     if (!confirm('Вы уверены, что хотите удалить этого пользователя?')) return;
 
@@ -135,7 +138,14 @@ const UsersContent: React.FC = () => {
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
-                <TableCell>{user.role}</TableCell>
+                <TableCell>
+                  {user.role === 'admin' ? (
+                    <ManageAccountsIcon color="primary" sx={{ position: "relative", top: 5 }} />
+                  ) : (
+                    <PersonIcon color="success" sx={{ position: "relative", top: 5 }} />
+                  )}
+                  <span style={{ marginLeft: 10 }}>{user.role}</span>
+                </TableCell>
                 <TableCell>
                   {user.createdAt ? dayjs(user.createdAt).format('DD.MM.YYYY HH:mm') : 'N/A'}
                 </TableCell>

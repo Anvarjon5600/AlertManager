@@ -22,13 +22,34 @@ import {
 import { DashboardLayout } from "@toolpad/core/DashboardLayout";
 import { useDemoRouter } from "@toolpad/core/internal";
 
-import Logo from "/public/icon.svg";
 import Nutanix from "../../assets/icons/nutanix.ico";
 import XClarity from "../../assets/icons/xclarity.ico";
 import Vmware from "../../assets/icons/clipart925106.png";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import HomeIcon from '@mui/icons-material/Home';
+
+
+const demoTheme = createTheme({
+  cssVariables: {
+    colorSchemeSelector: 'data-toolpad-color-scheme',
+  },
+  colorSchemes: { light: true, dark: true },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 800,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
+});
+
 
 const NAVIGATION: Navigation = [
+  { kind: "header", title: "Home"},
+  { segment: "home", title: "Home", icon: <HomeIcon /> },
+  { kind: "divider" },
   { kind: "header", title: "Platforms" },
   {
     segment: "nutanix",
@@ -46,14 +67,9 @@ const NAVIGATION: Navigation = [
     icon: <img src={Vmware} alt="Vmware Icon" style={{ width: 25, height: 24 }} />,
   },
   { kind: "divider" },
+  { kind: "header", title: "Users settings" },
   { segment: "users", title: "Users", icon: <ManageAccountsIcon /> },
 ];
-
-const demoTheme = createTheme({
-  cssVariables: { colorSchemeSelector: "data-toolpad-color-scheme" },
-  colorSchemes: { light: true, dark: true },
-  breakpoints: { values: { xs: 0, sm: 600, md: 600, lg: 1200, xl: 1536 } },
-});
 
 function DemoPageContent({ pathname }: { pathname: string }) {
   switch (pathname) {
@@ -65,21 +81,15 @@ function DemoPageContent({ pathname }: { pathname: string }) {
       return <UsersContent />;
     case "/vmware":
       return <VmwareContent />;
+    case "/home":
+      return (
+        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100%" width="100%">
+          <Typography variant="h4">Welcome to the Home Page</Typography>
+        </Box>
+      );
     default:
       return (
-        <Box
-          sx={{
-            py: 4,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            backgroundColor: "background.default",
-            minHeight: "100%",
-          }}
-        >
-          <Typography>Dashboard content for {pathname}</Typography>
-        </Box>
+        <NutanixContent />
       );
   }
 }
@@ -87,8 +97,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
 function CustomAppTitle() {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <img src={Logo} alt="Logo" />
-      <Typography variant="h5" fontWeight="550" color="hsl(210, 100%, 60%)">
+      <Typography variant="h4" fontWeight="400" color="#ffffff">
         Alerts
       </Typography>
     </Stack>
@@ -167,10 +176,10 @@ export default function DashboardLayoutAccount({ window }: { window?: () => Wind
       authentication={authentication}
       navigation={NAVIGATION}
       router={router}
-      theme={demoTheme}
       window={demoWindow}
+      theme={demoTheme}
     >
-      <DashboardLayout slots={{ appTitle: CustomAppTitle }}>
+      <DashboardLayout slots={{ appTitle: CustomAppTitle }} >
         <DemoPageContent pathname={router.pathname} />
       </DashboardLayout>
     </AppProvider>
