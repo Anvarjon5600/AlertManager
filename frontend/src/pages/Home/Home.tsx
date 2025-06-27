@@ -13,6 +13,7 @@ import NutanixContent from "../../components/NutanixContent/NutanixContent";
 import XClarityContent from "../../components/XClarityContent/XClarityContent";
 import VmwareContent from "../../components/VmwareContent/VmwareContent";
 import UsersContent from "../../components/UsersContent/UsersContent";
+import Dashboard from "../../components/Dashboard/Dashboard";
 
 import {
   AppProvider,
@@ -47,7 +48,7 @@ const demoTheme = createTheme({
 
 
 const NAVIGATION: Navigation = [
-  { kind: "header", title: "Home"},
+  { kind: "header", title: "Home" },
   { segment: "home", title: "Home", icon: <HomeIcon /> },
   { kind: "divider" },
   { kind: "header", title: "Platforms" },
@@ -82,22 +83,16 @@ function DemoPageContent({ pathname }: { pathname: string }) {
     case "/vmware":
       return <VmwareContent />;
     case "/home":
-      return (
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100%" width="100%">
-          <Typography variant="h4">Welcome to the Home Page</Typography>
-        </Box>
-      );
+      return <Dashboard />;
     default:
-      return (
-        <NutanixContent />
-      );
+      return <Dashboard />;
   }
 }
 
 function CustomAppTitle() {
   return (
     <Stack direction="row" alignItems="center" spacing={2}>
-      <Typography variant="h4" fontWeight="400" color="#ffffff">
+      <Typography variant="h6" fontWeight="400" color="#fhf">
         Alerts
       </Typography>
     </Stack>
