@@ -14,13 +14,16 @@ import {
 	Typography,
 	Box,
 	Modal,
+	Alert as MuiAlert,
 } from '@mui/material';
 import { RootState, AppDispatch } from '../../store/store';
 import { Alert } from '../../store/types/type';
+import { useNavigate } from 'react-router-dom';
 
 function NutanixAlerts() {
 	const { alerts, loading, error } = useSelector((state: RootState) => state.nutanix);
 	const dispatch: AppDispatch = useDispatch();
+	const navigate = useNavigate();
 	const [open, setOpen] = useState(false);
 	const [geminiRecommendation, setGeminiRecommendation] = useState('');
 	const [currentAlertId, setCurrentAlertId] = useState('');
@@ -28,30 +31,40 @@ function NutanixAlerts() {
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 
-	const HandleClick = (alert: Alert) => {
+	const handleGeminiClick = async (alert: Alert) => {
 		setCurrentAlertId(alert.id);
-		dispatch(fetchGeminiRecommendation(alert))
-			.then((response) => {
-				setGeminiRecommendation(response.payload);
+		try {
+			const result = await dispatch(fetchGeminiRecommendation(alert)).unwrap();
+			setGeminiRecommendation(result);
+			handleOpen();
+		} catch (error: any) {
+			if (error?.includes('Unauthorized')) {
+				navigate('/login');
+			} else {
+				setGeminiRecommendation('Не удалось получить рекомендацию: ' + error);
 				handleOpen();
-			})
-			.catch((error) => {
-				console.error('Error fetching Gemini recommendation:', error);
-				setGeminiRecommendation('Не удалось получить рекомендацию.');
-				handleOpen();
-			});
+			}
+		}
 	};
 
-	const handleCreateExcel = () => {
-		dispatch(createExcelReport());
+	const handleCreateExcel = async () => {
+		try {
+			await dispatch(createExcelReport()).unwrap();
+		} catch (error) {
+			console.error('Error creating Excel:', error);
+		}
 	};
 
 	if (loading) {
-		return <CircularProgress sx={{ mt: 4 }} />;
+		return (
+			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+				<CircularProgress />
+			</Box>
+		);
 	}
 
 	if (error) {
-		return <Typography color="error">{error}</Typography>;
+		return <MuiAlert severity="error" sx={{ mt: 2 }}>{error}</MuiAlert>;
 	}
 
 	return (
@@ -70,20 +83,30 @@ function NutanixAlerts() {
 									<TableCell sx={{ width: '50%' }}>Сообщение</TableCell>
 									<TableCell sx={{ textAlign: 'center' }}>Категории</TableCell>
 									<TableCell sx={{ textAlign: 'center' }}>Серьёзность</TableCell>
-									<TableCell sx={{ textAlign: 'center' }}>Рекомендация Gemini</TableCell>
+									<TableCell sx={{ textAlign: 'center' }}>Рекомендация</TableCell>
 								</TableRow>
 							</TableHead>
 							<TableBody>
 								{alerts.map((alert, index) => (
-									<TableRow key={index}>
+									<TableRow key={alert.id || index}>
 										<TableCell sx={{ textAlign: 'center' }}>{index + 1}</TableCell>
-										<TableCell sx={{ textAlign: 'center' }}>{new Date(alert.time / 1000).toLocaleString()}</TableCell>
+										<TableCell sx={{ textAlign: 'center' }}>
+											{new Date(alert.time / 1000).toLocaleString()}
+										</TableCell>
 										<TableCell>{alert.message}</TableCell>
 										<TableCell sx={{ textAlign: 'center' }}>{alert.categories}</TableCell>
 										<TableCell sx={{ textAlign: 'center' }}>{alert.severity}</TableCell>
 										<TableCell sx={{ textAlign: 'center' }}>
-											<Button variant="contained" onClick={() => HandleClick(alert)}>
-												Получить рекомендацию
+											<Button
+												variant="contained"
+												onClick={() => handleGeminiClick(alert)}
+												disabled={loading}
+											>
+												{loading && currentAlertId === alert.id ? (
+													<CircularProgress size={24} />
+												) : (
+													'Получить рекомендацию'
+												)}
 											</Button>
 										</TableCell>
 									</TableRow>
@@ -92,13 +115,19 @@ function NutanixAlerts() {
 						</Table>
 					</TableContainer>
 					<Box sx={{ mb: 2, mt: 2 }}>
-						<Button variant="contained" onClick={handleCreateExcel}>
+						<Button
+							variant="contained"
+							onClick={handleCreateExcel}
+							disabled={loading}
+						>
 							Создать Excel отчёт
 						</Button>
 					</Box>
 				</Box>
 			) : (
-				<Box sx={{ mb: 2, mt: 2 }}></Box>
+				<Typography variant="body1" sx={{ mt: 2 }}>
+					Нет данных об алертах
+				</Typography>
 			)}
 
 			<Modal open={open} onClose={handleClose}>
@@ -109,19 +138,26 @@ function NutanixAlerts() {
 						left: '50%',
 						transform: 'translate(-50%, -50%)',
 						width: '90%',
+						maxWidth: 800,
+						maxHeight: '80vh',
+						overflow: 'auto',
 						bgcolor: 'background.paper',
 						border: '2px solid #000',
 						boxShadow: 24,
 						p: 4,
 					}}
 				>
-					<Typography id="modal-modal-title" variant="h6" component="h2">
+					<Typography variant="h6" component="h2" gutterBottom>
 						Рекомендация Gemini для алерта {currentAlertId}
 					</Typography>
-					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
+					<Typography sx={{ mt: 2, whiteSpace: 'pre-line' }}>
 						{geminiRecommendation}
 					</Typography>
-					<Button variant="contained" onClick={handleClose} sx={{ mt: 2 }}>
+					<Button
+						variant="contained"
+						onClick={handleClose}
+						sx={{ mt: 2 }}
+					>
 						Закрыть
 					</Button>
 				</Box>

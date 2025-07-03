@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from config.config import Config
@@ -18,9 +18,16 @@ def create_app():
                 "supports_credentials": True,
                 "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
                 "allow_headers": ["Authorization", "Content-Type"],
+                "max_age": 86400,
             }
         },
     )
+
+    # Добавьте обработку OPTIONS для всех маршрутов
+    @app.before_request
+    def handle_options():
+        if request.method == "OPTIONS":
+            return jsonify({"status": "ok"}), 200
 
     jwt = JWTManager(app)
 
@@ -54,5 +61,8 @@ def create_app():
     from app.routes.users import bp as users_bp
 
     app.register_blueprint(users_bp)
+    from app.routes.nutanix import bp as nutanix_bp
+
+    app.register_blueprint(nutanix_bp)
 
     return app

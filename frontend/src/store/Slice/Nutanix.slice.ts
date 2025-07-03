@@ -1,9 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
-// import { RootState } from '../store';
 import * as XLSX from 'xlsx';
-import {Alert, NutanixConfig,NutanixState,FetchAlertsParams } from '../types/type';
-
+import {Alert, NutanixConfig, NutanixState, FetchAlertsParams } from '../types/type';
+import api from '../../api/api'; // Импортируем настроенный axios экземпляр
 
 const initialState: NutanixState = {
   config: {
@@ -22,16 +20,15 @@ const initialState: NutanixState = {
   error: null,
 };
 
-
-
 export const fetchNutanixAlerts = createAsyncThunk(
   'nutanix/fetchAlerts',
   async (params: FetchAlertsParams, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:5000/api/nutanix/alerts', params);
+      // Используем api вместо axios напрямую
+      const response = await api.post('/nutanix/alerts', params);
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -39,17 +36,17 @@ export const fetchNutanixAlerts = createAsyncThunk(
 export const fetchGeminiRecommendation = createAsyncThunk(
   'nutanix/fetchGemini',
   async (alert: Alert, { getState, rejectWithValue }) => {
-    console.log(alert,'slice');
     const state: any = getState();
     const config = state.nutanix.config;
     try {
-      const response = await axios.post('http://localhost:5000/api/nutanix/gemini', {
+      // Используем api вместо axios напрямую
+      const response = await api.post('/nutanix/gemini', {
         ...config,
         alert: alert,
       });
       return response.data.recommendation;
     } catch (error: any) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -100,9 +97,19 @@ export const nutanixSlice = createSlice({
         state.loading = false;
         state.error = action.error.message || 'Ошибка загрузки алертов.';
       })
-      // .addCase(fetchGeminiRecommendations.fulfilled, (state, action) => {
-      //   state.alerts = action.payload;
-      // });
+      .addCase(fetchGeminiRecommendation.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchGeminiRecommendation.fulfilled, (state) => {
+        state.loading = false;
+        // Здесь можно обновить конкретный alert с рекомендацией
+        // Например, если action.meta.arg содержит id алерта
+      })
+      .addCase(fetchGeminiRecommendation.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Ошибка получения рекомендации.';
+      });
   },
 });
 

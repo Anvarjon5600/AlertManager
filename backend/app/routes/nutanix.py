@@ -1,4 +1,5 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from app.services.alert_processing import get_nutanix_alerts, process_alert
 from app.services.gemini_service import gemini_recommendation
 
@@ -6,7 +7,10 @@ bp = Blueprint("nutanix", __name__, url_prefix="/api/nutanix")
 
 
 @bp.route("/alerts", methods=["POST"])
+@jwt_required()
 def get_alerts():
+    if request.method == "OPTIONS":
+        return jsonify({"status": "ok"}), 200
     data = request.get_json()
     vip = data.get("vip")
     username = data.get("username")
@@ -23,6 +27,7 @@ def get_alerts():
 
 
 @bp.route("/gemini", methods=["POST"])
+@jwt_required()
 def nutanix_gemini():
     data = request.get_json()
     alert = data.get("alert")

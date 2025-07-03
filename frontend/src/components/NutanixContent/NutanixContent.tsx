@@ -1,8 +1,11 @@
-import {  Box } from '@mui/material';
+import { Box } from '@mui/material';
 import NutanixConfigForm from '../NutanixConfigForm/NutanixConfigForm';
 import NutanixAlerts from '../NutanixAlerts/NutanixAlerts';
+// Импортируем компоненты NutanixConfigForm и NutanixAlerts
 
 function NutanixContent() {
+
+
 	return (
 		<Box
 			sx={{

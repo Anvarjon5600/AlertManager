@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
 from app.services.xclarity_service import get_xclarity_alerts, get_gemini_recommendation
 
 bp = Blueprint("xclarity", __name__, url_prefix="/api/xclarity")
 
 
 @bp.route("/alerts", methods=["POST"])
+@jwt_required()
 def xclarity_alerts():
     data = request.get_json()
     host = data.get("host")
@@ -16,6 +18,7 @@ def xclarity_alerts():
 
 
 @bp.route("/gemini", methods=["POST"])
+@jwt_required()
 def xclarity_gemini():
     try:
         data = request.get_json()
