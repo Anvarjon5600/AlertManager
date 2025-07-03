@@ -55,13 +55,13 @@ function NutanixAlerts() {
 		}
 	};
 
-	if (loading) {
-		return (
-			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-				<CircularProgress />
-			</Box>
-		);
-	}
+	// if (loading) {
+	// 	return (
+	// 		<Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+	// 			<CircularProgress />
+	// 		</Box>
+	// 	);
+	// }
 
 	if (error) {
 		return <MuiAlert severity="error" sx={{ mt: 2 }}>{error}</MuiAlert>;
@@ -125,9 +125,7 @@ function NutanixAlerts() {
 					</Box>
 				</Box>
 			) : (
-				<Typography variant="body1" sx={{ mt: 2 }}>
-					Нет данных об алертах
-				</Typography>
+				<Typography variant="body1" sx={{ mt: 2 }}></Typography>
 			)}
 
 			<Modal open={open} onClose={handleClose}>
