@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchNutanixAlerts } from '../../store/Slice/Nutanix.slice';
-import { TextField, Button, Box, Typography, Alert as MuiAlert } from '@mui/material';
+import { TextField, Button, Box, Typography, Alert as MuiAlert, CircularProgress } from '@mui/material';
 import { RootState, store } from '../../store/store';
 import { useNavigate } from 'react-router-dom';
 
-function NutanixConfigForm() {
+interface NutanixConfigFormProps {
+	onSuccess: () => void;
+}
+
+function NutanixConfigForm({ onSuccess }: NutanixConfigFormProps) {
 	const config = useSelector((state: RootState) => state.nutanix.config);
-	const { error } = useSelector((state: RootState) => state.nutanix);
+	const { error, loading } = useSelector((state: RootState) => state.nutanix);
 	const dispatch = useDispatch<typeof store.dispatch>();
 	const [localConfig, setLocalConfig] = useState(config);
 	const navigate = useNavigate();
@@ -32,6 +36,8 @@ function NutanixConfigForm() {
 
 			if (result.error && result.error.includes('Unauthorized')) {
 				navigate('/login');
+			} else {
+				onSuccess(); // Уведомляем об успешной отправке
 			}
 		} catch (err) {
 			console.error('Error:', err);
@@ -39,8 +45,19 @@ function NutanixConfigForm() {
 	};
 
 	return (
-		<Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-			<Typography variant="h6">Настройки Nutanix</Typography>
+		<Box component="form" onSubmit={handleSubmit} sx={{
+			display: 'flex',
+			flexDirection: 'column',
+			gap: 2,
+			position: 'relative',
+			top: '50%',
+			left: '0%',
+			transform: 'translate(0, -50%)',
+		}}>
+			<Typography variant="h4" sx={{
+				textAlign: 'center',
+				marginBottom: 3,
+			}}>Настройки Nutanix</Typography>
 			{error && <MuiAlert severity="error">{error}</MuiAlert>}
 			<TextField
 				label="VIP"
@@ -48,6 +65,7 @@ function NutanixConfigForm() {
 				value={localConfig.vip}
 				onChange={handleChange}
 				required
+				autoComplete="off"
 			/>
 			<TextField
 				label="Имя пользователя"
@@ -62,9 +80,16 @@ function NutanixConfigForm() {
 				type="password"
 				value={localConfig.password}
 				onChange={handleChange}
+				autoComplete="off"
 				required
 			/>
-			<Button type="submit" variant="contained">Отправить</Button>
+			<Button
+				type="submit"
+				variant="contained"
+				disabled={loading}
+			>
+				{loading ? <CircularProgress size={24} /> : 'Отправить'}
+			</Button>
 		</Box>
 	);
 }

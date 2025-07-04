@@ -5,13 +5,13 @@ import api from '../../api/api'; // Импортируем настроенны�
 
 const initialState: NutanixState = {
   config: {
-    vip: '192.168.30.200',
-    username: 'anvarjon',
-    password: 'Anvarjon.2001',
+    vip: '',
+    username: '',
+    password: '',
     smtpServer: 'email.hyperthink.uz',
     smtpPort: 587,
-    smtpSender: 'anvarjon.ganiyev@hyperthink.uz',
-    smtpPassword: 'anvarjon2001',
+    smtpSender: '',
+    smtpPassword: '',
     smtpReceiver: 'igor.panteleev@hyperthink.uz',
     geminiApiKey: import.meta.env.REACT_APP_GEMINI_API_KEY || '',
   },

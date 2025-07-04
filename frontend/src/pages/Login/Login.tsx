@@ -115,6 +115,7 @@ function Login() {
             name="name"
             label="username"
             variant="outlined"
+            autoComplete="off"
           />
           <CssTextField
             style={{ width: '400px' }}
@@ -123,6 +124,7 @@ function Login() {
             label="password"
             variant="outlined"
             type="password"
+            autoComplete="off"
           />
           <SignInButton variant="outlined" type="submit" disabled={loading}>
             {loading ? 'Loading...' : 'Sign in'}
