@@ -50,7 +50,7 @@ function NutanixConfigForm({ onSuccess }: NutanixConfigFormProps) {
 			flexDirection: 'column',
 			gap: 2,
 			position: 'relative',
-			top: '50%',
+			top: '45%',
 			left: '0%',
 			transform: 'translate(0, -50%)',
 		}}>
