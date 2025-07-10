@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateConfig, fetchXClarityAlerts } from '../../store/Slice/XClarity.slice';
-import { TextField, Button, Box, Typography } from '@mui/material';
+import { TextField, Button, Box, Typography, CircularProgress, Alert } from '@mui/material';
 import { RootState, store } from '../../store/store';
 
-function XClarityConfigForm() {
-	const config = useSelector((state: RootState) => state.xclarity.config);
+interface XClarityConfigFormProps {
+	onSuccess: () => void;
+}
+
+function XClarityConfigForm({ onSuccess }: XClarityConfigFormProps) {
+	const { config, loading, error } = useSelector((state: RootState) => state.xclarity);
 	const dispatch = useDispatch<typeof store.dispatch>();
 	const [localConfig, setLocalConfig] = useState(config);
 
@@ -18,23 +22,74 @@ function XClarityConfigForm() {
 		setLocalConfig({ ...localConfig, [name]: value });
 	};
 
-	const handleSubmit = (event: React.FormEvent) => {
+	const handleSubmit = async (event: React.FormEvent) => {
 		event.preventDefault();
-		dispatch(updateConfig(localConfig));
-		dispatch(fetchXClarityAlerts({
-			host: localConfig.host,
-			username: localConfig.username,
-			password: localConfig.password,
-		}));
+		try {
+			await dispatch(updateConfig(localConfig));
+			const resultAction = await dispatch(fetchXClarityAlerts({
+				host: localConfig.host,
+				username: localConfig.username,
+				password: localConfig.password,
+			}));
+			const result = (resultAction as any).payload;
+
+			if (result?.length > 0) {
+				onSuccess();
+			}
+		} catch (err) {
+			console.error('Error:', err);
+		}
 	};
 
 	return (
-		<Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-			<Typography variant="h6">Настройки XClarity</Typography>
-			<TextField label="Хост" name="host" value={localConfig.host} onChange={handleChange} />
-			<TextField label="Имя пользователя" name="username" value={localConfig.username} onChange={handleChange} />
-			<TextField label="Пароль" name="password" type="password" value={localConfig.password} onChange={handleChange} />
-			<Button type="submit" variant="contained">Отправить</Button>
+		<Box component="form" onSubmit={handleSubmit} sx={{
+			display: 'flex',
+			flexDirection: 'column',
+			gap: 3,
+			p: 3,
+			position: 'relative',
+			top: '50%',
+			left: '0%',
+			transform: 'translate(0, -50%) !important',
+		}}>
+			<Typography variant="h4" sx={{ fontWeight: 400 }}>Настройки XClarity</Typography>
+
+			{error && <Alert severity="error">{error}</Alert>}
+
+			<TextField
+				label="Хост"
+				name="host"
+				value={localConfig.host}
+				onChange={handleChange}
+				fullWidth
+				required
+			/>
+			<TextField
+				label="Имя пользователя"
+				name="username"
+				value={localConfig.username}
+				onChange={handleChange}
+				fullWidth
+				required
+			/>
+			<TextField
+				label="Пароль"
+				name="password"
+				type="password"
+				value={localConfig.password}
+				onChange={handleChange}
+				fullWidth
+				required
+			/>
+			<Button
+				type="submit"
+				variant="contained"
+				size="large"
+				disabled={loading}
+				sx={{ mt: 2 }}
+			>
+				{loading ? <CircularProgress size={24} /> : 'Загрузить алерты'}
+			</Button>
 		</Box>
 	);
 }

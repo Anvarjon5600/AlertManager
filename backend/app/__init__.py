@@ -64,5 +64,8 @@ def create_app():
     from app.routes.nutanix import bp as nutanix_bp
 
     app.register_blueprint(nutanix_bp)
+    from app.routes.xclarity import bp as xclarity_bp
+
+    app.register_blueprint(xclarity_bp)
 
     return app

@@ -69,7 +69,10 @@ const NutanixAlerts: React.FC<NutanixAlertsProps> = ({ onClose }) => {
 
 	// Обработчики событий
 	const handleGetRecommendation = async (alert: Alert) => {
-		setCurrentAlert({ id: alert.id, recommendation: '' });
+		setCurrentAlert({
+			id: alert.id,
+			recommendation: ''
+		});
 		try {
 			const result = await dispatch(fetchGeminiRecommendation(alert)).unwrap();
 			setCurrentAlert(prev => prev ? { ...prev, recommendation: result } : null);
