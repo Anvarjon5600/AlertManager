@@ -56,7 +56,7 @@ export const fetchXClarityAlerts = createAsyncThunk(
 
 export const fetchGeminiRecommendations = createAsyncThunk(
   'xclarity/fetchGemini',
-  async (alert: XClarityAlert, { getState, rejectWithValue }) => {
+  async (alert: XClarityAlert, { rejectWithValue }) => {
     try {
       const response = await api.post('/xclarity/gemini', {
         data: { alert } // Упрощенная структура запроса

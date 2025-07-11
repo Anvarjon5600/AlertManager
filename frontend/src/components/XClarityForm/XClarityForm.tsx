@@ -48,7 +48,7 @@ function XClarityConfigForm({ onSuccess }: XClarityConfigFormProps) {
 			gap: 3,
 			p: 3,
 			position: 'relative',
-			top: '50%',
+			top: '45%',
 			left: '0%',
 			transform: 'translate(0, -50%) !important',
 		}}>
