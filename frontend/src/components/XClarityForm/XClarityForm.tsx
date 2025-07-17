@@ -45,14 +45,14 @@ function XClarityConfigForm({ onSuccess }: XClarityConfigFormProps) {
 		<Box component="form" onSubmit={handleSubmit} sx={{
 			display: 'flex',
 			flexDirection: 'column',
-			gap: 3,
+			gap: 2,
 			p: 3,
 			position: 'relative',
 			top: '45%',
 			left: '0%',
 			transform: 'translate(0, -50%) !important',
 		}}>
-			<Typography variant="h4" sx={{ fontWeight: 400 }}>Настройки XClarity</Typography>
+			<Typography variant="h4" sx={{ fontWeight: 400,mb:3 }}>Настройки XClarity</Typography>
 
 			{error && <Alert severity="error">{error}</Alert>}
 
@@ -86,7 +86,6 @@ function XClarityConfigForm({ onSuccess }: XClarityConfigFormProps) {
 				variant="contained"
 				size="large"
 				disabled={loading}
-				sx={{ mt: 2 }}
 			>
 				{loading ? <CircularProgress size={24} /> : 'Загрузить алерты'}
 			</Button>
