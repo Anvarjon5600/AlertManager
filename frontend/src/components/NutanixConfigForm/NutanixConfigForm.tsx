@@ -60,7 +60,7 @@ function NutanixConfigForm({ onSuccess }: NutanixConfigFormProps) {
 			}}>Настройки Nutanix</Typography>
 			{error && <MuiAlert severity="error">{error}</MuiAlert>}
 			<TextField
-				label="VIP"
+				label="Хост"
 				name="vip"
 				value={localConfig.vip}
 				onChange={handleChange}
@@ -81,14 +81,14 @@ function NutanixConfigForm({ onSuccess }: NutanixConfigFormProps) {
 				value={localConfig.password}
 				onChange={handleChange}
 				autoComplete="off"
-				required
+				required 
 			/>
 			<Button
 				type="submit"
 				variant="contained"
 				disabled={loading}
 			>
-				{loading ? <CircularProgress size={24} /> : 'Отправить'}
+				{loading ? <CircularProgress size={24} /> : 'Загрузить алерты'}
 			</Button>
 		</Box>
 	);

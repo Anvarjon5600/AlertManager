@@ -67,5 +67,8 @@ def create_app():
     from app.routes.xclarity import bp as xclarity_bp
 
     app.register_blueprint(xclarity_bp)
+    from app.routes.vmware import bp as vmware_bp
+
+    app.register_blueprint(vmware_bp)
 
     return app

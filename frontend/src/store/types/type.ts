@@ -101,3 +101,24 @@ export interface XClarityState {
   loading: boolean;
   error: string | null;
 }
+
+export interface VmwareConfig {
+  host: string;
+  user: string;
+  password: string;
+}
+
+export interface VmwareAlert {
+  time: string;
+  msg: string;
+  type: 'Info' | 'Warning' | 'Error';
+  class: string;
+  recommendation?: string;
+}
+
+export interface VmwareState {
+  alerts: VmwareAlert[];
+  config: VmwareConfig;
+  loading: boolean;
+  error: string | null;
+}

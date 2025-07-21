@@ -1,119 +1,107 @@
+// app/components/VmwareAlerts/VmwareAlerts.tsx
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { fetchGeminiRecommendations } from '../../store/Slice/XClarity.slice';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button, CircularProgress, Typography, Box, Modal } from '@mui/material';
+import { fetchVmwareGemini } from '../../store/Slice/vmware.slice';
 import { RootState, AppDispatch } from '../../store/store';
+import {
+	Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+	Paper, Button, CircularProgress, Typography, Box, Modal, Slide, IconButton, Grid, styled
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-function XClarityAlerts() {
-	const { alerts, loading, error } = useSelector((state: RootState) => state.xclarity);
+const StatCard = styled(Paper)(({ theme }) => ({
+	padding: theme.spacing(3),
+	borderRadius: 12,
+	textAlign: 'center',
+	boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+}));
+
+const SeverityDot = styled(Box)({
+	width: 10, height: 10, borderRadius: '50%', display: 'inline-block', marginRight: 8
+});
+
+interface Props { onClose: () => void }
+
+function VmwareAlerts({ onClose }: Props) {
+	const { alerts, loading, error } = useSelector((s: RootState) => s.vmware);
 	const dispatch: AppDispatch = useDispatch();
-	const [open, setOpen] = useState(false);
-	const [geminiRecommendation, setGeminiRecommendation] = useState('');
-	const [currentAlertId, setCurrentAlertId] = useState('');
+	const [modalOpen, setModalOpen] = useState(false);
+	const [current, setCurrent] = useState<{ time: string; msg: string; recommendation?: string } | null>(null);
 
-	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	type AlertLevel = 'Info' | 'Warning' | 'Error';
+	const colors: Record<AlertLevel, string> = { Info: '#1cc88a', Warning: '#f6c23e', Error: '#e74a3b' };
 
-	const HandleClick = (alertID: string) => {
-		setCurrentAlertId(alertID);
-		const alert = alerts.find((a) => a.alertID === alertID);
-		console.log(alert, 'alert')
-		if (alert) {
-			dispatch(fetchGeminiRecommendations(alert))
-				.then((response) => {
-					setGeminiRecommendation(response.payload);
-					handleOpen();
-				})
-				.catch((error) => {
-					console.error('Error fetching Gemini recommendation:', error);
-					setGeminiRecommendation('Не удалось получить рекомендацию.');
-					handleOpen();
-				});
-		} else {
-			console.error('Alert not found');
-			setGeminiRecommendation('Алерт не найден.');
-			handleOpen();
-		}
+	const handleGemini = async (a: any) => {
+		setCurrent({ time: a.time, msg: a.msg });
+		const res = await dispatch(fetchVmwareGemini(a)).unwrap();
+		setCurrent({ time: a.time, msg: a.msg, recommendation: res.recommendation });
+		setModalOpen(true);
 	};
 
-	if (loading) {
-		return <CircularProgress sx={{ mt: 4 }} />;
-	}
-
-	if (error) {
-		return <Typography color="error">{error}</Typography>;
-	}
-
 	return (
-		<Box sx={{ p: 2, bgcolor: 'background.paper', minWidth: '100%' }}>
-			<Box sx={{ mb: 2, mt: 2 }}>
-				<Typography variant="h4">Список алертов Vmware</Typography>
-			</Box>
-
-			{alerts.length > 0 ? (
-				<TableContainer component={Paper} sx={{ bgcolor: 'background.paper', minWidth: '100%' }}>
-					<Table>
-						<TableHead>
-							<TableRow>
-								<TableCell>Дата события</TableCell>
-								<TableCell>Сообщение</TableCell>
-								<TableCell>Серьёзность</TableCell>
-								<TableCell>Тип системы</TableCell>
-								<TableCell>Имя системы</TableCell>
-								<TableCell>Рекомендация Gemini</TableCell>
+		<Box sx={{ p: 3, position: 'relative' }}>
+			<IconButton onClick={onClose} sx={{ position: 'absolute', right: 24, top: 24 }}><CloseIcon /></IconButton>
+			<Typography variant="h4" sx={{ textAlign: 'center', mb: 2 }}>Алерты VMware</Typography>
+			<Grid container spacing={3} sx={{ mb: 4 }}>
+				{(['Info', 'Warning', 'Error'] as AlertLevel[]).map((lvl, i) => (
+					<Grid item key={lvl} xs={4}>
+						<StatCard sx={{ borderTop: `4px solid ${colors[lvl]}` }}>
+							<Typography variant="h4">{alerts.filter(a => a.type === lvl).length}</Typography>
+							<Typography>{lvl}</Typography>
+						</StatCard>
+					</Grid>
+				))}
+			</Grid>
+			<TableContainer component={Paper} sx={{ borderRadius: 2 }}>
+				<Table>
+					<TableHead>
+						<TableRow>
+							{['Время', 'Сообщение', 'Тип', 'Действия'].map((h, i) => <TableCell key={i}>{h}</TableCell>)}
+						</TableRow>
+					</TableHead>
+					<TableBody>
+						{alerts.map(a => (
+							<TableRow key={a.time}>
+								<TableCell>{new Date(a.time).toLocaleString()}</TableCell>
+								<TableCell>{a.msg}</TableCell>
+								<TableCell><Box sx={{ display: 'flex', alignItems: 'center' }}><SeverityDot sx={{ bgcolor: colors[a.type] }} />{a.type}</Box></TableCell>
+								<TableCell>
+									<Button variant="contained" onClick={() => handleGemini(a)} disabled={loading && current?.time === a.time}>
+										{loading && current?.time === a.time ? <CircularProgress size={20} /> : 'Рекомендация'}
+									</Button>
+								</TableCell>
 							</TableRow>
-						</TableHead>
-						<TableBody>
-							{alerts.map((alert, index) => (
-								<TableRow key={index}>
-									<TableCell>{alert.eventDate}</TableCell>
-									<TableCell>{alert.msg}</TableCell>
-									<TableCell>{alert.severityText}</TableCell>
-									<TableCell>{alert.systemTypeText}</TableCell>
-									<TableCell>{alert.systemName}</TableCell>
-									<TableCell>
-										<Button variant="contained" onClick={() => HandleClick(alert.alertID)}>
-											Получить рекомендацию
-										</Button>
-									</TableCell>
-								</TableRow>
-							))}
-						</TableBody>
-					</Table>
-				</TableContainer>
-			) : (
-				<Typography variant="h6" sx={{ textAlign: 'center', mt: 4 }}>
-					❌ Нет доступных алертов.
-				</Typography>
-			)}
-
-			<Modal open={open} onClose={handleClose}>
-				<Box
-					sx={{
+						))}
+					</TableBody>
+				</Table>
+			</TableContainer>
+			<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+				<Slide direction="up" in={modalOpen} mountOnEnter unmountOnExit>
+					<Box sx={{
 						position: 'absolute',
 						top: '50%',
 						left: '50%',
-						transform: 'translate(-50%, -50%)',
+						transform: 'translate(-50%, -50%) !important',
 						width: '90%',
+						maxWidth: 800,
+						maxHeight: '80vh',
 						bgcolor: 'background.paper',
-						border: '2px solid #000',
+						borderRadius: 2,
 						boxShadow: 24,
 						p: 4,
-					}}
-				>
-					<Typography id="modal-modal-title" variant="h6" component="h2">
-						Рекомендация Gemini для алерта {currentAlertId}
-					</Typography>
-					<Typography id="modal-modal-description" sx={{ mt: 2 }}>
-						{geminiRecommendation}
-					</Typography>
-					<Button variant="contained" onClick={handleClose} sx={{ mt: 2 }}>
-						Закрыть
-					</Button>
-				</Box>
+						overflow: 'auto'
+					}}>
+						<Typography variant="h5">Рекомендация</Typography>
+						<Typography variant="body2" sx={{ mb: 2, fontStyle: 'italic' }}>"{current?.msg}"</Typography>
+						<Typography whiteSpace="pre-line">{current?.recommendation || 'Загрузка...'}</Typography>
+						<Box sx={{ mt: 2, textAlign: 'right' }}>
+							<Button variant="contained" onClick={() => setModalOpen(false)}>Закрыть</Button>
+						</Box>
+					</Box>
+				</Slide>
 			</Modal>
 		</Box>
 	);
 }
 
-export default XClarityAlerts;
+export default VmwareAlerts;
