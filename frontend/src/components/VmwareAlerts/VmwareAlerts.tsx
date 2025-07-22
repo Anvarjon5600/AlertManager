@@ -91,10 +91,18 @@ function VmwareAlerts({ onClose }: Props) {
 						p: 4,
 						overflow: 'auto'
 					}}>
-						<Typography variant="h5">Рекомендация</Typography>
+						<Typography variant="h5">ℹ️Рекомендация</Typography>
 						<Typography variant="body2" sx={{ mb: 2, fontStyle: 'italic' }}>"{current?.msg}"</Typography>
-						<Typography whiteSpace="pre-line">{current?.recommendation || 'Загрузка...'}</Typography>
-						<Box sx={{ mt: 2, textAlign: 'right' }}>
+						<Box sx={{
+							bgcolor: 'rgba(0,0,0,0.02)',
+							p: 3,
+							borderRadius: 1,
+							borderLeft: '4px solid #0056b3',
+							mb: 3
+						}}>
+							<Typography whiteSpace="pre-line">{current?.recommendation || 'Загрузка...'}</Typography>
+						</Box>
+						<Box sx={{ mt: 2, textAlign: 'left' }}>
 							<Button variant="contained" onClick={() => setModalOpen(false)}>Закрыть</Button>
 						</Box>
 					</Box>

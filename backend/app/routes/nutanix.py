@@ -31,12 +31,18 @@ def get_alerts():
 def nutanix_gemini():
     data = request.get_json()
     alert = data.get("alert")
+    if not alert:
+        return jsonify({"error": "Alert not found"}), 400
 
-    if alert:
-        try:
-            recommendation = gemini_recommendation(alert)
-            return jsonify({"recommendation": recommendation})
-        except Exception as e:
-            return jsonify({"error": f"Ошибка обработки алерта: {str(e)}"}), 500
-    else:
-        return jsonify({"error": "Alert not found in request"}), 400
+    try:
+        recommendation = gemini_recommendation(
+            {
+                "message": alert.get("msg", alert.get("message", "")),
+                "categories": alert.get("categories", []),
+                "severity": alert.get("severity", alert.get("type", "")),
+                "platform": "Nutanix",
+            }
+        )
+        return jsonify({"recommendation": recommendation})  
+    except Exception as e:
+        return jsonify({"error": f"Ошибка обработки alert: {str(e)}"}), 500

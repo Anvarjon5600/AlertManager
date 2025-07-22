@@ -27,7 +27,7 @@ def vmware_events():
 @bp.route("/gemini", methods=["POST"])
 @jwt_required()
 def vmware_gemini():
-    try:
+    try: 
         data = request.get_json()
         alert = data.get("alert")
         if not alert:
@@ -38,6 +38,8 @@ def vmware_gemini():
                 "message": alert.get("msg", ""),
                 "categories": alert.get("categories", []),
                 "severity": alert.get("type", ""),
+                "platform": "VMware"
+                
             }
         )
         return jsonify({"recommendation": recommendation})
