@@ -43,7 +43,7 @@ function VmwareAlerts({ onClose }: Props) {
 			<IconButton onClick={onClose} sx={{ position: 'absolute', right: 24, top: 24 }}><CloseIcon /></IconButton>
 			<Typography variant="h4" sx={{ textAlign: 'center', mb: 2 }}>Алерты VMware</Typography>
 			<Grid container spacing={3} sx={{ mb: 4 }}>
-				{(['Info', 'Warning', 'Error'] as AlertLevel[]).map((lvl, i) => (
+				{(['Info', 'Warning', 'Error'] as AlertLevel[]).map((lvl) => (
 					<Grid item key={lvl} xs={4}>
 						<StatCard sx={{ borderTop: `4px solid ${colors[lvl]}` }}>
 							<Typography variant="h4">{alerts.filter(a => a.type === lvl).length}</Typography>
@@ -64,9 +64,21 @@ function VmwareAlerts({ onClose }: Props) {
 							<TableRow key={a.time}>
 								<TableCell>{new Date(a.time).toLocaleString()}</TableCell>
 								<TableCell>{a.msg}</TableCell>
-								<TableCell><Box sx={{ display: 'flex', alignItems: 'center' }}><SeverityDot sx={{ bgcolor: colors[a.type] }} />{a.type}</Box></TableCell>
 								<TableCell>
-									<Button variant="contained" onClick={() => handleGemini(a)} disabled={loading && current?.time === a.time}>
+									<Box sx={{ display: 'flex', alignItems: 'center' }}>
+										<SeverityDot sx={{ bgcolor: colors[a.type] }} />{a.type}
+									</Box>
+								</TableCell>
+								<TableCell>
+									<Button
+										variant="contained"
+										onClick={() => handleGemini(a)}
+										disabled={loading && current?.time === a.time}
+										sx={{
+											minWidth: 180,
+											bgcolor: '#4e73df',
+											'&:hover': { bgcolor: '#2e59d9' }
+										}}>
 										{loading && current?.time === a.time ? <CircularProgress size={20} /> : 'Рекомендация'}
 									</Button>
 								</TableCell>

@@ -7,9 +7,7 @@ services:
     ports:
       - "5000:5000"
     environment:
-      - FLASK_ENV=development
-    volumes:
-      - ./backend:/app
+      - FLASK_ENV=production  # режим ПРОДакшена
     networks:
       - app_network
     restart: always
@@ -19,10 +17,6 @@ services:
     build: ./frontend
     ports:
       - "3000:80"
-    environment:
-      - CHOKIDAR_USEPOLLING=true
-    volumes:
-      - ./frontend:/app
     networks:
       - app_network
     restart: always
