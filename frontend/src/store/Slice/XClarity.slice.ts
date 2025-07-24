@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import api from '../../api/api'; // Используем наш axios instance
 import { XClarityAlert, XClarityConfig, XClarityState } from '../types/type.ts';
+import XLSX from 'xlsx-js-style';
+
 
 const initialState: XClarityState = {
   alerts: [],
@@ -8,7 +10,7 @@ const initialState: XClarityState = {
     host: '',
     username: '',
     password: '',
-  },
+  },  
   loading: false,
   error: null,
 };
@@ -92,6 +94,41 @@ export const updateAlertResolution = createAsyncThunk(
     }
   }
 );
+
+
+export function exportAlerts(alerts: any[], fileName: string) {
+  const wb = XLSX.utils.book_new();
+  const headers = ['Time','Message','Platform','Categories','Severity','Recommendation'];
+  const data = alerts.map(a => [
+    new Date(a.time).toLocaleString(),
+    a.msg,
+    a.platform || a.systemTypeText || 'N/A',
+    (a.categories || []).join(', '),
+    a.type || a.severity,
+    a.recommendation || ''
+  ]);
+  
+  const ws_data = [headers, ...data];
+  const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+  headers.forEach((_, i) => {
+    const cell = ws[XLSX.utils.encode_cell({ r: 0, c: i })];
+    cell.s = {
+      font: { bold: true, color: { rgb: 'FFFFFFFF' } },
+      fill: { fgColor: { rgb: 'FF4e73df' } },
+      alignment: { horizontal: 'center' }
+    };
+  });
+
+  ws['!cols'] = ws_data[0].map((_, i) => {
+    const max = ws_data.map(r => (r[i] || '').toString().length)
+      .reduce((a, b) => Math.max(a, b), 10);
+    return { wch: max + 2 };
+  });
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Alerts');
+  XLSX.writeFile(wb, fileName, { compression: true });
+}
 
 export const xclaritySlice = createSlice({
   name: 'xclarity',

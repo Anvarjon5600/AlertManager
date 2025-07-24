@@ -8,6 +8,8 @@ import {
 } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { RootState, AppDispatch } from '../../store/store';
+import { exportAlerts } from '../../store/Slice/XClarity.slice';
+
 
 const StatCard = styled(Paper)(({ theme }) => ({
     padding: theme.spacing(3),
@@ -145,73 +147,70 @@ function XClarityAlerts({ onClose }: XClarityAlertsProps) {
                     </Grid>
                 ))}
             </Grid>
-
-            {/* Таблица алертов */}
-            {alerts.length > 0 ? (
-                <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 2 }}>
-                    <Table>
-                        <TableHead sx={{ bgcolor: 'rgba(0,0,0,0.02)' }}>
-                            <TableRow>
-                                {['Дата', 'Сообщение', 'Серьёзность', 'Тип системы', 'Имя системы', 'Действия'].map((header, i) => (
-                                    <TableCell key={i} align="center" sx={{ fontWeight: 600, py: 2 }}>
-                                        {header}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {alerts.map((alert, index) => (
-                                <TableRow
-                                    key={alert.alertID || index}
-                                    hover
-                                    sx={{ '&:nth-of-type(even)': { bgcolor: 'rgba(0,0,0,0.02)' } }}
-                                >
-                                    <TableCell align="center">{alert.eventDate}</TableCell>
-                                    <TableCell>{alert.msg}</TableCell>
-                                    <TableCell align="center">
-                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                            <SeverityDot sx={{ bgcolor: getSeverityColor(alert.severityText) }} />
-                                            {alert.severityText}
-                                        </Box>
-                                    </TableCell>
-                                    <TableCell align="center">{alert.systemTypeText}</TableCell>
-                                    <TableCell align="center">{alert.systemName}</TableCell>
-                                    <TableCell align="center">
-                                        <Button
-                                            variant="contained"
-                                            onClick={() => handleGetRecommendation(alert)}
-                                            disabled={loading && currentAlert?.id === alert.alertID}
-                                            sx={{
-                                                minWidth: 180,
-                                                bgcolor: '#4e73df',
-                                                '&:hover': { bgcolor: '#2e59d9' }
-                                            }}
-                                        >
-                                            {loading && currentAlert?.id === alert.alertID ? (
-                                                <CircularProgress size={24} sx={{ color: 'white' }} />
-                                            ) : (
-                                                'Рекомендация'
-                                            )}
-                                        </Button>
-                                    </TableCell>
-                                </TableRow>
+            <TableContainer component={Paper} sx={{ borderRadius: 2, boxShadow: 2 }}>
+                <Table>
+                    <TableHead sx={{ bgcolor: 'rgba(0,0,0,0.02)' }}>
+                        <TableRow>
+                            {['Дата', 'Сообщение', 'Серьёзность', 'Тип системы', 'Имя системы', 'Действия'].map((header, i) => (
+                                <TableCell key={i} align="center" sx={{ fontWeight: 600, py: 2 }}>
+                                    {header}
+                                </TableCell>
                             ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            ) : (
-                <Box sx={{
-                    p: 4,
-                    textAlign: 'center',
-                    bgcolor: 'background.default',
-                    borderRadius: 2,
-                    boxShadow: 1
-                }}>
-                    <Typography variant="h6" color="text.secondary">
-                        Нет данных об алертах
-                    </Typography>
-                </Box>
-            )}
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {alerts.map((alert, index) => (
+                            <TableRow
+                                key={alert.alertID || index}
+                                hover
+                                sx={{ '&:nth-of-type(even)': { bgcolor: 'rgba(0,0,0,0.02)' } }}
+                            >
+                                <TableCell align="center">{alert.eventDate}</TableCell>
+                                <TableCell>{alert.msg}</TableCell>
+                                <TableCell align="center">
+                                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                        <SeverityDot sx={{ bgcolor: getSeverityColor(alert.severityText) }} />
+                                        {alert.severityText}
+                                    </Box>
+                                </TableCell>
+                                <TableCell align="center">{alert.systemTypeText}</TableCell>
+                                <TableCell align="center">{alert.systemName}</TableCell>
+                                <TableCell align="center">
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => handleGetRecommendation(alert)}
+                                        disabled={loading && currentAlert?.id === alert.alertID}
+                                        sx={{
+                                            minWidth: 180,
+                                            bgcolor: '#4e73df',
+                                            '&:hover': { bgcolor: '#2e59d9' }
+                                        }}
+                                    >
+                                        {loading && currentAlert?.id === alert.alertID ? (
+                                            <CircularProgress size={24} sx={{ color: 'white' }} />
+                                        ) : (
+                                            'Рекомендация'
+                                        )}
+                                    </Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                <Button
+                    variant="contained"
+                    onClick={() => exportAlerts(alerts, 'xclarity_alerts.xlsx')}
+                    disabled={loading}
+                    sx={{
+                        bgcolor: '#1cc88a',
+                        '&:hover': { bgcolor: '#17a673' }
+                    }}
+                >
+                    Экспорт в Excel
+                </Button>
+            </Box>
 
             {/* Модальное окно с рекомендацией */}
             <Modal open={isModalOpen} onClose={handleCloseModal}>

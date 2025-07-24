@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchVmwareGemini } from '../../store/Slice/vmware.slice';
 import { RootState, AppDispatch } from '../../store/store';
+import { exportAlerts } from '../../store/Slice/vmware.slice';
 import {
 	Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
 	Paper, Button, CircularProgress, Typography, Box, Modal, Slide, IconButton, Grid, styled
@@ -23,7 +24,7 @@ const SeverityDot = styled(Box)({
 interface Props { onClose: () => void }
 
 function VmwareAlerts({ onClose }: Props) {
-	const { alerts, loading, error } = useSelector((s: RootState) => s.vmware);
+	const { alerts, loading, } = useSelector((s: RootState) => s.vmware);
 	const dispatch: AppDispatch = useDispatch();
 	const [modalOpen, setModalOpen] = useState(false);
 	const [current, setCurrent] = useState<{ time: string; msg: string; recommendation?: string } | null>(null);
@@ -87,6 +88,19 @@ function VmwareAlerts({ onClose }: Props) {
 					</TableBody>
 				</Table>
 			</TableContainer>
+			<Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+				<Button
+					variant="contained"
+					onClick={() => exportAlerts(alerts, 'vmware_alerts.xlsx')}
+					disabled={loading}
+					sx={{
+						bgcolor: '#1cc88a',
+						'&:hover': { bgcolor: '#17a673' }
+					}}
+				>
+					Экспорт в Excel
+				</Button>
+			</Box>
 			<Modal open={modalOpen} onClose={() => setModalOpen(false)}>
 				<Slide direction="up" in={modalOpen} mountOnEnter unmountOnExit>
 					<Box sx={{

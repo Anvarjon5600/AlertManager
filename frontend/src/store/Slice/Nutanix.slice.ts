@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import * as XLSX from 'xlsx';
 import {Alert, NutanixConfig, NutanixState, FetchAlertsParams } from '../types/type';
 import api from '../../api/api'; // Импортируем настроенный axios экземпляр
+import XLSX from 'xlsx-js-style';
 
 const initialState: NutanixState = {
   config: {
@@ -54,26 +54,49 @@ export const fetchGeminiRecommendation = createAsyncThunk(
 export const createExcelReport = createAsyncThunk(
   'nutanix/createExcelReport',
   async (_, { getState }) => {
-    const state = getState() as { nutanix: NutanixState };
-    const alerts = state.nutanix.alerts;
+    const { alerts } = (getState() as { nutanix: NutanixState }).nutanix;
 
     const wb = XLSX.utils.book_new();
-    const wsData = [
-      ['Time', 'Message', 'Solution', 'Categories', 'Severity', 'Gemini Recommendation'],
-      ...alerts.map((alert) => [
-        new Date(alert.time / 1000).toLocaleString(),
-        alert.message,
-        'Требуется анализ',
-        alert.categories,
-        alert.severity,
-        alert.gemini_rec || '',
-      ]),
+
+    const headers = [
+      'Time', 'Message', 'Solution', 'Categories', 'Severity', 'Gemini Recommendation'
     ];
-    const ws = XLSX.utils.aoa_to_sheet(wsData);
-    XLSX.utils.book_append_sheet(wb, ws, 'Alerts');
-    XLSX.writeFile(wb, 'nutanix_alerts.xlsx');
+    const data = alerts.map(a => [
+      new Date(a.time / 1000).toLocaleString(),
+      a.message,
+      'Требуется анализ',
+      Array.isArray(a.categories) ? a.categories.join(', ') : a.categories,
+      a.severity,
+      a.gemini_rec || '',
+    ]);
+
+    const ws_data = [headers, ...data];
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+
+    // Устанавливаем стили заголовков
+    headers.forEach((h, i) => {
+      const cell = ws[XLSX.utils.encode_cell({ r: 0, c: i })];
+      cell.s = {
+        font: { bold: true, color: { rgb: 'FFFFFFFF' }, sz: 12 },
+        fill: { fgColor: { rgb: 'FF4e73df' } },
+        alignment: { horizontal: 'center', vertical: 'center' }
+      };
+    });
+
+    // Автоширина колонок
+    const colWidths = ws_data[0].map((_, i) => {
+      const max = ws_data
+        .map(row => (row[i] || '').toString().length)
+        .reduce((a, b) => Math.max(a, b), 10);
+      return { wch: max + 2 };
+    });
+    ws['!cols'] = colWidths;
+
+    XLSX.utils.book_append_sheet(wb, ws, 'Nutanix Alerts');
+    XLSX.writeFile(wb, 'nutanix_alerts.xlsx', { bookType: 'xlsx', compression: true });
   }
 );
+
 
 export const nutanixSlice = createSlice({
   name: 'nutanix',
