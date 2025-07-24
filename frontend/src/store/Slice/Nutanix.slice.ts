@@ -74,7 +74,7 @@ export const createExcelReport = createAsyncThunk(
     const ws = XLSX.utils.aoa_to_sheet(ws_data);
 
     // Устанавливаем стили заголовков
-    headers.forEach((h, i) => {
+    headers.forEach((_, i) => {
       const cell = ws[XLSX.utils.encode_cell({ r: 0, c: i })];
       cell.s = {
         font: { bold: true, color: { rgb: 'FFFFFFFF' }, sz: 12 },
